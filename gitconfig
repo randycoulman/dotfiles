@@ -1,0 +1,56 @@
+[user]
+	name = Randy Coulman
+	email = rcoulman@gmail.com
+
+[alias]
+    br = branch
+    ci = commit
+    cl = clone
+    co = checkout
+    dc = diff --cached
+    dt = difftool
+    dtc = difftool --cached
+    hist = log --pretty=format:\"%h %ar | %s%d [%an]\" --graph
+    mt = mergetool
+    pulff = pull --ff-only
+    st = status
+
+[color]
+	branch = auto
+	diff = auto
+    grep = auto
+    interactive = auto
+    showbranch = auto
+	status = auto
+    ui = auto
+
+[credential]
+	helper = osxkeychain
+
+[core]
+	quotepath = off
+	excludesfile = /Users/randy/.gitignore_global
+
+[diff]
+    tool = kdiff3
+
+[difftool]
+    prompt = false
+
+[difftool "kdiff3"]
+    path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
+    trustExitCode = false
+
+[difftool "sourcetree"]
+	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$LOCAL\" \"$REMOTE\"
+	path =
+
+[mergetool]
+    prompt = false
+
+[mergetool "sourcetree"]
+	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+	trustExitCode = true
+
+[push]
+	default = current
