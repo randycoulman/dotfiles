@@ -13,15 +13,18 @@
  '(global-linum-mode t)
  '(ido-enable-tramp-completion nil)
  '(indent-tabs-mode nil)
+ '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
+ '(initial-scratch-message nil)
  '(kill-whole-line t)
  '(make-backup-files nil)
  '(safe-local-variable-values (quote ((encoding . utf-8))))
+ '(save-interprogram-paste-before-kill t)
  '(show-paren-mode t)
  '(tab-width 4)
  '(text-mode-hook (quote (turn-on-flyspell turn-on-auto-fill text-mode-hook-identify)))
- '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
