@@ -8,7 +8,18 @@ Position the cursor at its beginning, according to the current mode."
   (newline-and-indent)
   )
 
+(defun rac-smart-open-line-above ()
+  "Insert an empty line above the current line.
+Position the cursor at its beginning, according to the current mode."
+  (interactive)
+  (move-beginning-of-line nil)
+  (newline-and-indent)
+  (forward-line -1)
+  (indent-according-to-mode)
+  )
+
 (global-set-key [(shift return)] 'rac-smart-open-line)
+(global-set-key [(control shift return)] 'rac-smart-open-line-above)
 
 
 (defun rac-move-line-up ()
