@@ -26,3 +26,10 @@
 (add-to-list 'auto-mode-alist '("\\.markdn\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.mdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mode-map (kbd "C-.") nil)
+     (define-key flyspell-mode-map (kbd "C-,") nil)
+     (define-key flyspell-mode-map (kbd "C-;") nil)
+     ))
