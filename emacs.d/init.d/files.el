@@ -14,5 +14,5 @@
       (find-file file)))
   )
 
-(global-set-key (kbd "C-c f") 'rac-recentf-ido-find-file)
-;;(global-set-key (kbd "C-c f") 'recentf-open-files)
+(global-set-key (kbd "C-c C-f") 'rac-recentf-ido-find-file)
+;;(global-set-key (kbd "C-c C-f") 'recentf-open-files)
