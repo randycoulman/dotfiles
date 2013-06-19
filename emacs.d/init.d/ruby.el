@@ -9,6 +9,10 @@
 
 (add-hook 'ruby-mode-hook 'inf-ruby-keys)
 
+(add-hook 'ruby-mode-hook
+          'lambda()
+          (local-set-key (kbd "RET") 'reindent-then-newline-and-indent))
+
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("[Rr]akefile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))

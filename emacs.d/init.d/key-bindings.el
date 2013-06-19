@@ -1,5 +1,6 @@
+(global-set-key "" 'newline-and-indent)
+(global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key "" (quote undo))
 (global-set-key "\C-ci" 'idomenu)
 
-(electric-indent-mode t)
 (electric-pair-mode t)
