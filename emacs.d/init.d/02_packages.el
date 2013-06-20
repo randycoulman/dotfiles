@@ -2,6 +2,8 @@
 
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (setq rac-required-packages
       (list 'exec-path-from-shell
@@ -10,6 +12,7 @@
             'iedit
             'inf-ruby
             'markdown-mode
+            'mmm-mode
             'multi-term
             'ruby-compilation
             'yari
