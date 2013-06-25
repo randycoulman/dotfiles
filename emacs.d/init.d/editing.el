@@ -1,4 +1,4 @@
-;;; "Borrowed" from emacsredux.com
+;;; "Borrowed" from emacsredux.com and Ryan Davis (aka @zenspider)
 
 (defun rac-smart-open-line ()
   "Insert an empty line after the current line.
@@ -41,6 +41,22 @@ Position the cursor at its beginning, according to the current mode."
 
 (global-set-key [(meta shift up)] 'rac-move-line-up)
 (global-set-key [(meta shift down)] 'rac-move-line-down)
+
+
+(defun rac-scroll-up ()
+  "Scroll up one line; move text, not cursor."
+  (interactive)
+  (scroll-down 1)
+  )
+
+(defun rac-scroll-down ()
+  "Scroll down one line; move text, not cursor."
+  (interactive)
+  (scroll-up 1)
+  )
+
+(global-set-key (kbd "<M-up>") 'rac-scroll-up)
+(global-set-key (kbd "<M-down>") 'rac-scroll-down)
 
 
 (defun rac-smarter-move-beginning-of-line (arg)
