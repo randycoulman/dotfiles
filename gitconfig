@@ -12,7 +12,7 @@
     dtc = difftool --cached
     hist = log --pretty=format:\"%h %ar | %s%d [%an]\" --graph
     mt = mergetool
-    pulff = pull --ff-only
+    pullff = pull --ff-only
     st = status
 
 [color]
