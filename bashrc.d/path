@@ -1,2 +1,2 @@
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/opt/ruby/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/opt/ruby/bin:/usr/local/sbin:$HOME/.rvm/bin:$PATH
 export MANPATH=/usr/local/share/man:$MANPATH
