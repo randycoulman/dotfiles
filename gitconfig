@@ -10,6 +10,7 @@
     dc = diff --cached
     dt = difftool
     dtc = difftool --cached
+    ff = pull --ff-only
     hist = log --pretty=format:\"%h %ar | %s%d [%an]\" --graph
     mt = mergetool
     pullff = pull --ff-only
