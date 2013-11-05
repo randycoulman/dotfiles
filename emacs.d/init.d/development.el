@@ -1,6 +1,8 @@
-(require 'expand-region)
 (require 'iedit)
 (require 'iedit-rect)
+(require 'projectile)
+
+(projectile-global-mode)
 
 (add-hook 'prog-mode-hook
           '(lambda ()
@@ -9,6 +11,3 @@
 (add-hook 'prog-mode-hook 'subword-mode)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(global-set-key (kbd "C-.") 'er/expand-region)
-(global-set-key (kbd "C-,") 'er/contract-region)

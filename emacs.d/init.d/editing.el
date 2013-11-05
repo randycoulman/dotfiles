@@ -1,3 +1,9 @@
+(require 'expand-region)
+
+(global-set-key (kbd "C-.") 'er/expand-region)
+(global-set-key (kbd "C-,") 'er/contract-region)
+
+
 (require 'multiple-cursors)
 
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -8,6 +14,7 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this-dwim)
 (global-unset-key (kbd "M-<down-mouse-1>"))
 (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
+
 
 (require 'smartparens-config)
 
