@@ -15,6 +15,7 @@
             'mmm-mode
             'multi-term
             'ruby-compilation
+            'smartparens
             'yari
             'yasnippet))
 

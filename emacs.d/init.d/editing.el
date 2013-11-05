@@ -1,3 +1,5 @@
+(require 'smartparens-config)
+
 ;;; "Borrowed" from emacsredux.com and Ryan Davis (aka @zenspider)
 
 (defun rac-smart-open-line ()
