@@ -3,3 +3,4 @@ url
 auto-save-list
 ede-projects.el
 /emacs.d/projectile-bookmarks.eld
+.cask
