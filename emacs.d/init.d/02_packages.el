@@ -14,6 +14,7 @@
             'markdown-mode
             'mmm-mode
             'multi-term
+            'multiple-cursors
             'ruby-compilation
             'smartparens
             'yari
