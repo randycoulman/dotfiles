@@ -3,6 +3,7 @@
 (source "gnu" "http://elpa.gnu.org/packages/")
 
 (depends-on "cask")
+(depends-on "coffee-mode")
 (depends-on "dash")
 (depends-on "epl")
 (depends-on "exec-path-from-shell")
@@ -11,6 +12,7 @@
 (depends-on "idomenu")
 (depends-on "iedit")
 (depends-on "inf-ruby")
+(depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "mmm-mode")
 (depends-on "multi-term")
