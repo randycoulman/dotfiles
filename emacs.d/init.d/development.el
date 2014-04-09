@@ -4,6 +4,8 @@
 
 (projectile-global-mode)
 
+(which-function-mode)
+
 (add-hook 'prog-mode-hook
           '(lambda ()
              (set-fill-column 80)))
