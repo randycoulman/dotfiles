@@ -1,6 +1,6 @@
-(source "melpa" "http://melpa.milkbox.net/packages/")
-(source "marmalade" "http://marmalade-repo.org/packages/")
-(source "gnu" "http://elpa.gnu.org/packages/")
+(source melpa)
+(source marmalade)
+(source gnu)
 
 (depends-on "cask")
 (depends-on "coffee-mode")
@@ -9,6 +9,8 @@
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
 (depends-on "f")
+(depends-on "git-commit-mode")
+(depends-on "git-rebase-mode")
 (depends-on "idomenu")
 (depends-on "iedit")
 (depends-on "inf-ruby")
