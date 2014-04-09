@@ -3,8 +3,9 @@
 (require 'inf-ruby)
 
 (add-hook 'ruby-mode-hook
-          'lambda()
-          (local-set-key (kbd "RET") 'reindent-then-newline-and-indent))
+          '(lambda()
+	     (local-set-key (kbd "RET") 'reindent-then-newline-and-indent)
+	     (local-set-key (kbd "C-c C-c") 'xmp)))
 
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("[Rr]akefile\\'" . ruby-mode))
