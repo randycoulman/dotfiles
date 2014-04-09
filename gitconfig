@@ -55,3 +55,8 @@
 
 [push]
 	default = current
+[gitreview]
+	username = randycoulman
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
