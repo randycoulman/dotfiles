@@ -12,6 +12,7 @@
 (depends-on "git-commit-mode")
 (depends-on "git-rebase-mode")
 (depends-on "idomenu")
+(depends-on "ido-vertical-mode")
 (depends-on "iedit")
 (depends-on "inf-ruby")
 (depends-on "magit")
