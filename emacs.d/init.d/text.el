@@ -7,7 +7,6 @@
           '(lambda ()
              (local-set-key [?\C-c?\C-/] 'sgml-close-tag)))
 
-(add-to-list 'auto-mode-alist '(".*_EDITMSG\\'" . text-mode))
 (add-to-list 'auto-mode-alist '("svn-commit.tmp" . text-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdn\\'" . markdown-mode))
