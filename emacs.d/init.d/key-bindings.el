@@ -3,7 +3,7 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (global-set-key "" 'newline-and-indent)
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key "" (quote undo))
+(global-set-key "" 'undo)
 (global-set-key "\C-ci" 'idomenu)
 
 (electric-pair-mode t)
