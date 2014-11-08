@@ -7,7 +7,6 @@
  '(case-fold-search t)
  '(column-number-mode t)
  '(compilation-scroll-output t)
- '(custom-safe-themes (quote ("fc6e906a0e6ead5747ab2e7c5838166f7350b958d82e410257aeeb2820e8a07a" default)))
  '(delete-selection-mode t)
  '(global-auto-revert-mode t)
  '(global-hl-line-mode t)
