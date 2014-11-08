@@ -5,7 +5,7 @@ require "pathname"
 # https://github.com/ryanb/dotfiles/blob/master/Rakefile
 #
 
-FILES = FileList.new('*') { |list| list.exclude("Rakefile", ".git") }
+FILES = FileList["*"].exclude("Rakefile", "README.md", "LICENSE", ".git")
 OPTIONS = { replace_all: false }
 
 desc "Install the dotfiles into user's home directory"
