@@ -44,7 +44,7 @@
 
 [difftool "sourcetree"]
 	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 
 [mergetool]
     prompt = false
@@ -55,8 +55,13 @@
 
 [push]
 	default = current
+
+[pull]
+    rebase = true
+
 [gitreview]
 	username = randycoulman
+
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
