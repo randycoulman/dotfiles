@@ -33,11 +33,6 @@
     :front "{% codeblock .* lang:cpp %}"
     :front-offset 1
     :back "{% endcodeblock %}")
-   (embedded-smalltalk
-    :submode smalltalk-mode
-    :front "{% codeblock .* lang:smalltalk %}"
-    :front-offset 1
-    :back "{% endcodeblock %}")
    ))
 
 (mmm-add-mode-ext-class 'markdown-mode nil 'markdown)
