@@ -5,6 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(c-default-style (quote ((java-mode . "java") (other . "rc"))))
  '(case-fold-search t)
+ '(coffee-tab-width 2)
  '(column-number-mode t)
  '(compilation-scroll-output t)
  '(delete-selection-mode t)
