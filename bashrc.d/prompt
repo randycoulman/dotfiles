@@ -1,4 +1,7 @@
-if [ -x $HOME/bin/git-prompt.sh ]
+if [ -x $HOME/bin/liquidprompt ]
+then
+    [[ $- = *i* ]] && source $HOME/bin/liquidprompt
+elif [ -x $HOME/bin/git-prompt.sh ]
 then
     . $HOME/bin/git-prompt.sh
 else
