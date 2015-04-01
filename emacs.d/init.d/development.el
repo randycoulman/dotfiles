@@ -6,7 +6,6 @@
 
 (which-function-mode)
 
-(add-hook 'prog-mode-hook 'auto-fill-mode)
 (add-hook 'prog-mode-hook 'subword-mode)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
