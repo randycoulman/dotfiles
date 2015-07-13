@@ -9,8 +9,6 @@
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
 (depends-on "f")
-(depends-on "git-commit-mode")
-(depends-on "git-rebase-mode")
 (depends-on "git-timemachine")
 (depends-on "ido-vertical-mode")
 (depends-on "idomenu")
