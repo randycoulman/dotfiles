@@ -1,0 +1,18 @@
+"*":
+  "exception-reporting":
+    userId: "30e6f2d0-42d3-ab77-4984-dde4c431f019"
+  welcome:
+    showOnStartup: false
+  core: {}
+  editor:
+    invisibles: {}
+    fontFamily: "Hack"
+  autosave:
+    enabled: true
+  "git-diff":
+    showIconsInEditorGutter: true
+  "ruby-test":
+    testFramework: "minitest"
+    rspecAllCommand: "vagrant ssh -c \"rspec --tty spec\""
+    rspecFileCommand: "vagrant ssh -c \"rspec --tty {relative_path}\""
+    rspecSingleCommand: "vagrant ssh -c \"rspec --tty {relative_path}:{line_number}\""
