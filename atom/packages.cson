@@ -1,0 +1,9 @@
+packages: [
+  "auto-indent"
+  "git-blame"
+  "git-diff-popup"
+  "git-plus"
+  "merge-conflicts"
+  "package-sync"
+  "ruby-test"
+]
