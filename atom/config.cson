@@ -3,10 +3,14 @@
     userId: "30e6f2d0-42d3-ab77-4984-dde4c431f019"
   welcome:
     showOnStartup: false
-  core: {}
+  core:
+    projectHome: "/Users/randy/src"
+    audioBeep: false
   editor:
     invisibles: {}
     fontFamily: "Hack"
+    preferredLineLength: 100
+    showIndentGuide: true
   autosave:
     enabled: true
   "git-diff":
