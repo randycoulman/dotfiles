@@ -6,10 +6,10 @@
   core:
     projectHome: "/Users/randy/src"
     audioBeep: false
+    excludeVcsIgnoredPaths: false
   editor:
     invisibles: {}
     fontFamily: "Hack"
-    preferredLineLength: 100
     showIndentGuide: true
   autosave:
     enabled: true
