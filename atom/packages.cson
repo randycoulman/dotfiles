@@ -6,5 +6,6 @@ packages: [
   "merge-conflicts"
   "package-sync"
   "ruby-test"
+  "synced-sidebar"
   "toggle-quotes"
 ]
