@@ -5,6 +5,8 @@ packages: [
   "git-plus"
   "merge-conflicts"
   "package-sync"
+  "project-manager"
+  "rails-open-rspec"
   "ruby-test"
   "synced-sidebar"
   "toggle-quotes"
