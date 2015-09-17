@@ -5,3 +5,4 @@ dev
 .node-gyp
 packages/
 .apm/
+projects.cson
