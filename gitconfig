@@ -15,6 +15,7 @@
     mt = mergetool
     pullff = pull --ff-only
     st = status
+    sync = !git co master && git pull && git fetch -a -p && git snip --full -n
 
 [color]
 	branch = auto
