@@ -24,7 +24,7 @@
  '(save-interprogram-paste-before-kill t)
  '(show-smartparens-global-mode 1)
  '(tab-width 4)
- '(text-mode-hook (quote (turn-on-flyspell turn-on-auto-fill text-mode-hook-identify)))
+ '(text-mode-hook (quote (turn-on-flyspell text-mode-hook-identify)))
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify)))
 (custom-set-faces
