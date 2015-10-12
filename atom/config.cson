@@ -18,7 +18,7 @@
     showIconsInEditorGutter: true
   "ruby-test":
     testFramework: "minitest"
-    rspecAllCommand: "vagrant ssh -c \"rspec --tty spec\""
-    rspecFileCommand: "vagrant ssh -c \"rspec --tty {relative_path}\""
-    rspecSingleCommand: "vagrant ssh -c \"rspec --tty {relative_path}:{line_number}\""
+    rspecAllCommand: "bundle exec rspec --tty spec"
+    rspecFileCommand: "bundle exec rspec --tty {relative_path}"
+    rspecSingleCommand: "bundle exec rspec --tty {relative_path}:{line_number}"
   "git-blame": {}
