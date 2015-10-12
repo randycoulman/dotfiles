@@ -22,4 +22,9 @@
     rspecFileCommand: "bundle exec rspec --tty {relative_path}"
     rspecSingleCommand: "bundle exec rspec --tty {relative_path}:{line_number}"
   "git-blame": {}
+  "markdown-deluxe":
+    fontFamily: "Hack"
   "expand-region": {}
+"source.gfm":
+  editor:
+    softWrap: true
