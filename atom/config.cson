@@ -11,6 +11,7 @@
     invisibles: {}
     fontFamily: "Hack"
     showIndentGuide: true
+    fontSize: 15
   autosave:
     enabled: true
   "git-diff":
