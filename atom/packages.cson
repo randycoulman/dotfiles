@@ -3,6 +3,7 @@ packages: [
   "expand-region"
   "git-diff-popup"
   "git-plus"
+  "language-javascript-jsx"
   "markdown-scroll-sync"
   "merge-conflicts"
   "package-sync"
