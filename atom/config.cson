@@ -7,6 +7,10 @@
     projectHome: "/Users/randy/src"
     audioBeep: false
     excludeVcsIgnoredPaths: false
+    themes: [
+      "one-light-ui"
+      "one-light-syntax"
+    ]
   editor:
     invisibles: {}
     fontFamily: "Hack"
