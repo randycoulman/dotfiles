@@ -1,7 +1,6 @@
 packages: [
   "auto-indent"
   "expand-region"
-  "git-blame"
   "git-diff-popup"
   "git-plus"
   "markdown-scroll-sync"
