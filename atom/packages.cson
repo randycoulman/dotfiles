@@ -6,6 +6,7 @@ packages: [
   "language-javascript-jsx"
   "linter"
   "linter-eslint"
+  "linter-rubocop"
   "markdown-scroll-sync"
   "merge-conflicts"
   "package-sync"
