@@ -4,6 +4,8 @@ packages: [
   "git-diff-popup"
   "git-plus"
   "language-javascript-jsx"
+  "linter"
+  "linter-eslint"
   "markdown-scroll-sync"
   "merge-conflicts"
   "package-sync"
