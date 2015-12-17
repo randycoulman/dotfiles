@@ -25,6 +25,7 @@
     rspecAllCommand: "bundle exec rspec --tty spec"
     rspecFileCommand: "bundle exec rspec --tty {relative_path}"
     rspecSingleCommand: "bundle exec rspec --tty {relative_path}:{line_number}"
+    specFramework: "rspec"
   "git-blame": {}
   "markdown-deluxe":
     fontFamily: "Hack"
