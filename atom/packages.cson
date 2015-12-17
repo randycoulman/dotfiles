@@ -12,7 +12,9 @@ packages: [
   "package-sync"
   "project-manager"
   "rails-open-rspec"
+  "relative-numbers"
   "ruby-test"
   "synced-sidebar"
   "toggle-quotes"
+  "vim-mode"
 ]

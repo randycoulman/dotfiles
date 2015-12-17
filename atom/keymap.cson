@@ -28,3 +28,7 @@
 'atom-text-editor':
   'alt-up': 'expand-region:expand'
   'alt-down': 'expand-region:shrink'
+
+'atom-text-editor.vim-mode.insert-mode':
+  'j k': 'vim-mode:activate-normal-mode'
+  'escape': 'unset!'
