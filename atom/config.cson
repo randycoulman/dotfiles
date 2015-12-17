@@ -29,6 +29,8 @@
   "markdown-deluxe":
     fontFamily: "Hack"
   "expand-region": {}
+  "vim-mode":
+    startInInsertMode: true
 "source.gfm":
   editor:
     softWrap: true
