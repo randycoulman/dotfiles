@@ -31,6 +31,8 @@
   "expand-region": {}
   "vim-mode":
     startInInsertMode: true
+  "package-sync":
+    forceOverwrite: true
 "source.gfm":
   editor:
     softWrap: true
