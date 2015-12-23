@@ -31,4 +31,6 @@
 
 'atom-text-editor.vim-mode.insert-mode':
   'j k': 'vim-mode:activate-normal-mode'
-  'escape': 'unset!'
+
+'atom-text-editor.vim-mode.autocomplete-active':
+  'escape': 'autocomplete-plus:cancel'
