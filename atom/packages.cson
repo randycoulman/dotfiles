@@ -19,4 +19,5 @@ packages: [
   "terminal-plus"
   "toggle-quotes"
   "vim-mode"
+  "vim-surround"
 ]
