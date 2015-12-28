@@ -16,6 +16,7 @@ packages: [
   "relative-numbers"
   "ruby-test"
   "synced-sidebar"
+  "terminal-plus"
   "toggle-quotes"
   "vim-mode"
 ]
