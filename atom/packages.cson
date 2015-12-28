@@ -1,5 +1,6 @@
 packages: [
   "auto-indent"
+  "emmet"
   "expand-region"
   "git-diff-popup"
   "git-plus"
