@@ -15,6 +15,7 @@ packages: [
   "rails-open-rspec"
   "relative-numbers"
   "ruby-test"
+  "sort-lines"
   "synced-sidebar"
   "terminal-plus"
   "toggle-quotes"
