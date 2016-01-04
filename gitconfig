@@ -11,6 +11,7 @@
     dt = difftool
     dtc = difftool --cached
     ff = pull --ff-only
+    fixpair = commit --amend --reset-author --no-edit
     hist = log --color --graph --format=\"%Cred%h%Creset |%C(bold yellow)%d%Creset %s %Cgreen(%ar)%Creset %C(bold blue)<%an>%Creset\"
     mt = mergetool
     pullff = pull --ff-only
