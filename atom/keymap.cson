@@ -34,3 +34,7 @@
 
 'atom-text-editor.vim-mode.autocomplete-active':
   'escape': 'autocomplete-plus:cancel'
+
+'.tree-view':
+  'ctrl-h': 'tree-view:recursive-collapse-directory'
+  'ctrl-l': 'tree-view:recursive-expand-directory'
