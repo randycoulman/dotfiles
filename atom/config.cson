@@ -3,6 +3,8 @@
     userId: "30e6f2d0-42d3-ab77-4984-dde4c431f019"
   welcome:
     showOnStartup: false
+  autosave:
+    enabled: true
   core:
     projectHome: "/Users/randy/src"
     audioBeep: false
@@ -14,10 +16,9 @@
   editor:
     invisibles: {}
     fontFamily: "Hack"
+    fontSize: 19
     showIndentGuide: true
-    fontSize: 15
-  autosave:
-    enabled: true
+    tabType: "soft"
   "git-diff":
     showIconsInEditorGutter: true
   "ruby-test":
@@ -27,6 +28,8 @@
     rspecSingleCommand: "bundle exec rspec --tty {relative_path}:{line_number}"
     specFramework: "rspec"
   "git-blame": {}
+  "linter-sass-lint":
+    noConfigDisable: true
   "markdown-deluxe":
     fontFamily: "Hack"
   "expand-region": {}
