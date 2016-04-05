@@ -7,3 +7,4 @@ packages/
 .apm/
 projects.cson
 blob-store/
+git-time-machine/

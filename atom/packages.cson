@@ -4,6 +4,7 @@ packages: [
   "expand-region"
   "git-diff-popup"
   "git-plus"
+  "git-time-machine"
   "language-javascript-jsx"
   "linter"
   "linter-eslint"
