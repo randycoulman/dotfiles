@@ -38,3 +38,9 @@
 '.tree-view':
   'ctrl-h': 'tree-view:recursive-collapse-directory'
   'ctrl-l': 'tree-view:recursive-expand-directory'
+
+'body':
+  'cmd-k down': 'pane:split-down'
+  'cmd-k left': 'pane:split-left'
+  'cmd-k right': 'pane:split-right'
+  'cmd-k up': 'pane:split-up'
