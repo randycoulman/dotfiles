@@ -1,24 +1,25 @@
 "*":
-  "exception-reporting":
-    userId: "30e6f2d0-42d3-ab77-4984-dde4c431f019"
-  welcome:
-    showOnStartup: false
   autosave:
     enabled: true
   core:
-    projectHome: "/Users/randy/src"
     audioBeep: false
     excludeVcsIgnoredPaths: false
     themes: [
       "one-light-ui"
       "one-light-syntax"
     ]
+    projectHome: "/Users/randy/src"
   editor:
-    invisibles: {}
     fontFamily: "Hack"
     fontSize: 19
+    invisibles: {}
     showIndentGuide: true
     tabType: "soft"
+  emmet: {}
+  "exception-reporting":
+    userId: "30e6f2d0-42d3-ab77-4984-dde4c431f019"
+  "expand-region": {}
+  "git-blame": {}
   "git-diff":
     showIconsInEditorGutter: true
   "ruby-test":
@@ -28,15 +29,24 @@
     rspecSingleCommand: "bundle exec rspec --tty {relative_path}:{line_number}"
     specFramework: "rspec"
   "git-blame": {}
+  "git-plus": {}
+  linter:
+    errorPanelHeight: 26
+  "linter-eslint": {}
   "linter-sass-lint":
     noConfigDisable: true
   "markdown-deluxe":
     fontFamily: "Hack"
-  "expand-region": {}
-  "vim-mode":
-    startInInsertMode: true
   "package-sync":
     forceOverwrite: true
+  "terminal-plus":
+    core: {}
+    style: {}
+  "toggle-quotes": {}
+  "vim-mode":
+    startInInsertMode: true
+  welcome:
+    showOnStartup: false
 "source.gfm":
   editor:
     softWrap: true
