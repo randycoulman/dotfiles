@@ -3,7 +3,6 @@
     enabled: true
   core:
     audioBeep: false
-    excludeVcsIgnoredPaths: false
     themes: [
       "one-light-ui"
       "one-light-syntax"
