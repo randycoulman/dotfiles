@@ -3,9 +3,6 @@
     enabled: true
   core:
     audioBeep: false
-    themes: [
-      "one-light-ui"
-      "one-light-syntax"
     ]
     projectHome: "/Users/randy/src"
   editor:
