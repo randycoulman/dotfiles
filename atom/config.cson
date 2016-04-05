@@ -39,6 +39,8 @@
     fontFamily: "Hack"
   "package-sync":
     forceOverwrite: true
+  tabs:
+    enableVcsColoring: true
   "terminal-plus":
     core: {}
     style: {}
