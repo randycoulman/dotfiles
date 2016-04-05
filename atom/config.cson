@@ -22,13 +22,9 @@
   "git-blame": {}
   "git-diff":
     showIconsInEditorGutter: true
-  "ruby-test":
-    testFramework: "minitest"
     rspecAllCommand: "bundle exec rspec --tty spec"
     rspecFileCommand: "bundle exec rspec --tty {relative_path}"
     rspecSingleCommand: "bundle exec rspec --tty {relative_path}:{line_number}"
-    specFramework: "rspec"
-  "git-blame": {}
   "git-plus": {}
   linter:
     errorPanelHeight: 26
@@ -39,6 +35,9 @@
     fontFamily: "Hack"
   "package-sync":
     forceOverwrite: true
+  "ruby-test":
+    specFramework: "rspec"
+    testFramework: "minitest"
   tabs:
     enableVcsColoring: true
   "terminal-plus":
