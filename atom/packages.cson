@@ -10,6 +10,7 @@ packages: [
   "linter-eslint"
   "linter-rubocop"
   "linter-sass-lint"
+  "list-edit"
   "markdown-scroll-sync"
   "merge-conflicts"
   "package-sync"
