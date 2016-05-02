@@ -23,7 +23,8 @@
   "git-plus": {}
   linter:
     errorPanelHeight: 26
-  "linter-eslint": {}
+  "linter-eslint":
+    fixOnSave: true
   "linter-rubocop": {}
   "linter-sass-lint":
     noConfigDisable: true
