@@ -26,7 +26,8 @@
     showIconsInEditorGutter: true
   "git-plus": {}
   linter:
-    errorPanelHeight: 26
+    errorPanelHeight: 104
+    showErrorTabLine: true
   "linter-eslint":
     fixOnSave: true
   "linter-rubocop": {}
