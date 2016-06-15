@@ -36,6 +36,7 @@
 	excludesfile = /Users/randy/.gitignore_global
 
 [diff]
+    compactionHeuristic = true
     tool = kdiff3
 
 [difftool]
