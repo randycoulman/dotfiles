@@ -4,6 +4,10 @@
   core:
     audioBeep: false
     projectHome: "/Users/randy/src"
+    themes: [
+      "one-light-ui"
+      "one-light-syntax"
+    ]
   editor:
     fontFamily: "Hack"
     fontSize: 19
