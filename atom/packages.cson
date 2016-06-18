@@ -2,6 +2,7 @@ packages: [
   "auto-indent"
   "emmet"
   "expand-region"
+  "file-icons"
   "git-diff-popup"
   "git-plus"
   "git-time-machine"
