@@ -6,6 +6,8 @@ packages: [
   "git-diff-popup"
   "git-plus"
   "git-time-machine"
+  "hyperclick"
+  "js-hyperclick"
   "language-javascript-jsx"
   "linter"
   "linter-eslint"
