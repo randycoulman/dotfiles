@@ -22,6 +22,7 @@ packages: [
   "relative-numbers"
   "ruby-test"
   "sort-lines"
+  "split-diff"
   "synced-sidebar"
   "terminal-plus"
   "toggle-quotes"
