@@ -3,6 +3,7 @@
     enabled: true
   core:
     audioBeep: false
+    destroyEmptyPanes: false
     projectHome: "/Users/randy/src"
     themes: [
       "one-light-ui"
@@ -40,6 +41,8 @@
   "ruby-test":
     specFramework: "rspec"
     testFramework: "minitest"
+  "split-diff":
+    syncHorizontalScroll: true
   tabs:
     enableVcsColoring: true
   "terminal-plus":
