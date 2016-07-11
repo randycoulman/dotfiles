@@ -2,6 +2,7 @@
   autosave:
     enabled: true
   core:
+    allowPendingPaneItems: false
     audioBeep: false
     destroyEmptyPanes: false
     projectHome: "/Users/randy/src"
