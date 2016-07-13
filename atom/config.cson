@@ -27,6 +27,8 @@
     rspecSingleCommand: "bundle exec rspec --tty {relative_path}:{line_number}"
     showIconsInEditorGutter: true
   "git-plus": {}
+  "incremental-search":
+    instantSearch: true
   linter:
     errorPanelHeight: 104
     showErrorTabLine: true
