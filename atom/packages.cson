@@ -1,4 +1,5 @@
 packages: [
+  "atom-react-native-autocomplete"
   "auto-indent"
   "emmet"
   "expand-region"
@@ -20,6 +21,8 @@ packages: [
   "package-sync"
   "project-manager"
   "rails-open-rspec"
+  "react"
+  "react-es6-snippets"
   "relative-numbers"
   "ruby-test"
   "sort-lines"
