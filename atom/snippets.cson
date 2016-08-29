@@ -19,3 +19,24 @@
 # If you are unfamiliar with CSON, you can read more about it in the
 # Atom Flight Manual:
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
+
+'.source.js':
+  'Redux container':
+    'prefix': 'rcont'
+    'body': """
+            import { connect } from 'react-redux'
+
+            import $1 from '../components/$1'
+
+            export default connect()($1)
+
+            """
+  'Stylesheet (React Native)':
+    'prefix': 'rnss'
+    'body': """
+            import { StyleSheet } from 'react-native'
+
+            export default StyleSheet.create({
+            })
+            
+            """
