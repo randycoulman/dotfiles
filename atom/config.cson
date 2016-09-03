@@ -1,4 +1,8 @@
 "*":
+  "advanced-open-file":
+    createDirectories: true
+    createFileInstantly: true
+    helmDirSwitch: true
   autosave:
     enabled: true
   core:
@@ -30,7 +34,6 @@
   "incremental-search":
     instantSearch: true
   linter:
-    errorPanelHeight: 104
     showErrorTabLine: true
   "linter-eslint":
     fixOnSave: true

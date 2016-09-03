@@ -1,4 +1,5 @@
 packages: [
+  "advanced-open-file"
   "atom-react-native-autocomplete"
   "auto-indent"
   "emmet"
@@ -20,7 +21,6 @@ packages: [
   "merge-conflicts"
   "package-sync"
   "project-manager"
-  "rails-open-rspec"
   "react"
   "react-es6-snippets"
   "relative-numbers"
