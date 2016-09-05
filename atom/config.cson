@@ -55,6 +55,8 @@
     core: {}
     style: {}
   "toggle-quotes": {}
+  "tree-view":
+    sortFoldersBeforeFiles: false
   "vim-mode":
     startInInsertMode: true
   welcome:
