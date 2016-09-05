@@ -39,5 +39,14 @@
             export default StyleSheet.create({
               $1
             })
-            
+
+            """
+'.source.gfm':
+  'Octopress Codeblock':
+    'prefix': 'cb'
+    'body': """
+            {% codeblock $1 lang:$2 %}
+            $3
+            {% endcodeblock %}
+
             """
