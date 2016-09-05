@@ -2,6 +2,7 @@ packages: [
   "advanced-open-file"
   "atom-react-native-autocomplete"
   "auto-indent"
+  "autocomplete-modules"
   "emmet"
   "expand-region"
   "file-icons"

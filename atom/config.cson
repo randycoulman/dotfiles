@@ -3,6 +3,9 @@
     createDirectories: true
     createFileInstantly: true
     helmDirSwitch: true
+  "autocomplete-modules":
+    babelPluginModuleAlias: true
+    webpack: true
   autosave:
     enabled: true
   core:
