@@ -3,7 +3,7 @@ packages: [
   "atom-react-native-autocomplete"
   "auto-indent"
   "autocomplete-modules"
-  "emmet"
+  "emmet-simplified"
   "expand-region"
   "file-icons"
   "git-diff-popup"
