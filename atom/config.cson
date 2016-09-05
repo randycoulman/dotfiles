@@ -62,6 +62,8 @@
     startInInsertMode: true
   welcome:
     showOnStartup: false
+  whitespace:
+    ignoreWhitespaceOnCurrentLine: false
 "source.gfm":
   editor:
     softWrap: true
