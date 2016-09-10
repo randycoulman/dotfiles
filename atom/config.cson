@@ -43,6 +43,9 @@
     fontFamily: "Hack"
   "package-sync":
     forceOverwrite: true
+  "project-manager":
+    environmentSpecificProjects: true
+    includeGitRepositories: true
   "ruby-test":
     specFramework: "rspec"
     testFramework: "minitest"
