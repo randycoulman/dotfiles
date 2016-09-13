@@ -21,6 +21,16 @@
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
 
 '.source.js':
+  'Redux ActionType':
+    'prefix': 'ract'
+    'body': """
+            import { createActionTypes } from 'utils'
+
+            export default createActionTypes('$1', [
+              '$2'
+            ])
+
+            """
   'Redux container':
     'prefix': 'rcont'
     'body': """
@@ -29,6 +39,45 @@
             import $1 from '../components/$1'
 
             export default connect()($1)
+
+            """
+  'Redux reducer':
+    'prefix': 'rred'
+    'body': """
+            // import ActionType from './constants/ActionType'
+            import { createReducer } from 'utils'
+
+            const initialState = {
+            }
+
+            export default createReducer(initialState, {
+            })
+
+            """
+  'Redux reducer spec':
+    'prefix': 'rrspec'
+    'body': """
+            import reducer from '../reducer'
+            import { nullAction } from 'testutils'
+
+            describe('errors reducer', () => {
+              const initialState = reducer(undefined, nullAction)
+
+              describe('$1', () => {
+                $2
+              })
+            })
+
+            """
+  'Redux selectors':
+    'prefix': 'rsel'
+    'body': """
+            import { path } from 'ramda'
+
+            const localState = path(['app', '$1'])
+
+            export default {
+            }
 
             """
   'Stylesheet (React Native)':
