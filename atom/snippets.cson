@@ -69,6 +69,20 @@
             })
 
             """
+  'Redux reducer action spec':
+    'prefix': 'rrit'
+    'body': """
+            context('$1', () => {
+              const state = initialState
+              const action = $2
+              const newState = reducer(state, action)
+
+              it('$3', () => {
+                expect($4).$5
+              })
+            })
+
+            """
   'Redux selectors':
     'prefix': 'rsel'
     'body': """
