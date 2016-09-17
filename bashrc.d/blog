@@ -1,0 +1,6 @@
+alias op="bundle exec octopress"
+alias opd="bundle exec octopress new draft"
+alias oplive="livereloadx _site"
+alias oppub="bundle exec octopress publish"
+alias ops="bundle exec jekyll serve --drafts --incremental"
+alias opship="bundle exec jekyll clean && bundle exec jekyll build && bundle exec octopress deploy"
