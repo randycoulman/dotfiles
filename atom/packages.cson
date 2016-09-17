@@ -18,6 +18,7 @@ packages: [
   "linter-rubocop"
   "linter-sass-lint"
   "list-edit"
+  "local-history"
   "markdown-scroll-sync"
   "merge-conflicts"
   "package-sync"
