@@ -94,6 +94,21 @@
             }
 
             """
+  'Component (React Native)':
+    'prefix': 'rncomp'
+    'body': """
+            import React from 'react'
+            import { View } from 'react-native'
+
+            import styles from './styles'
+
+            const $1 = () => (
+              <View style={styles.container} />
+            )
+
+            export default $1
+
+            """
   'Stylesheet (React Native)':
     'prefix': 'rnss'
     'body': """
