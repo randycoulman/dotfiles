@@ -27,8 +27,6 @@
     userId: "30e6f2d0-42d3-ab77-4984-dde4c431f019"
   "expand-region": {}
   "find-and-replace":
-    closeFindPanelAfterSearch: true
-    focusEditorAfterSearch: true
     scrollToResultOnLiveSearch: true
   "git-blame": {}
   "git-diff":
