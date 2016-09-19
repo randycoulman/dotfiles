@@ -1,7 +1,7 @@
 "*":
   "advanced-open-file":
     createDirectories: true
-    createFileInstantly: true
+    fuzzyMatch: true
     helmDirSwitch: true
   "autocomplete-modules":
     babelPluginModuleAlias: true
