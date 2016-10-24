@@ -23,6 +23,7 @@ packages: [
   "merge-conflicts"
   "package-sync"
   "project-manager"
+  "ramda-repl"
   "react"
   "react-es6-snippets"
   "relative-numbers"
