@@ -21,7 +21,6 @@
     fontFamily: "Hack"
     fontSize: 19
     invisibles: {}
-    showIndentGuide: true
     tabType: "soft"
   emmet: {}
   "exception-reporting":
@@ -47,6 +46,11 @@
     fontFamily: "Hack"
   "package-sync":
     forceOverwrite: true
+  "plantuml-preview":
+    jarLocation: "/Users/randy/bin/plantuml.jar"
+  "platformio-ide-terminal":
+    toggles:
+      autoClose: true
   "project-manager":
     environmentSpecificProjects: true
     includeGitRepositories: true
