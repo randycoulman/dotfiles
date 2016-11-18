@@ -12,7 +12,6 @@
     audioBeep: false
     destroyEmptyPanes: false
     projectHome: "/Users/randy/src"
-    telemetryConsent: "limited"
     telemetryConsent: "no"
     themes: [
       "one-light-ui"

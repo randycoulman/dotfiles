@@ -31,7 +31,6 @@ packages: [
   "sort-lines"
   "split-diff"
   "synced-sidebar"
-  "terminal-plus"
   "toggle-quotes"
   "vim-mode"
   "vim-surround"
