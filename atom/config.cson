@@ -13,6 +13,7 @@
     destroyEmptyPanes: false
     projectHome: "/Users/randy/src"
     telemetryConsent: "limited"
+    telemetryConsent: "no"
     themes: [
       "one-light-ui"
       "one-light-syntax"
@@ -39,7 +40,8 @@
     showErrorTabLine: true
   "linter-eslint":
     fixOnSave: true
-  "linter-rubocop": {}
+  "linter-rubocop":
+    disableWhenNoConfigFile: true
   "linter-sass-lint":
     noConfigDisable: true
   "markdown-deluxe":
