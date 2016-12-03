@@ -19,7 +19,7 @@
     ]
   editor:
     fontFamily: "Hack"
-    fontSize: 19
+    fontSize: 20
     invisibles: {}
     tabType: "soft"
   emmet: {}
@@ -34,6 +34,8 @@
   "git-plus": {}
   "incremental-search":
     instantSearch: true
+  "language-babel":
+    autoIndentJSX: true
   linter:
     showErrorTabLine: true
   "linter-eslint":
@@ -73,9 +75,21 @@
     showOnStartup: false
   whitespace:
     ignoreWhitespaceOnCurrentLine: false
+".babel.regexp.source":
+  editor:
+    showIndentGuide: true
+".css.source.styled":
+  editor:
+    showIndentGuide: true
 ".gfm.source":
   editor:
     softWrapAtPreferredLineLength: true
+".js.jsx.source":
+  editor:
+    showIndentGuide: true
+".languagebabel.ttlextension":
+  editor:
+    showIndentGuide: true
 "source.gfm":
   editor:
     softWrap: true
