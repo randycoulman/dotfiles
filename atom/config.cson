@@ -85,9 +85,9 @@
   editor:
     softWrapAtPreferredLineLength: true
 ".git-commit.text":
-editor:
-  preferredLineLength: 65
-  softWrapAtPreferredLineLength: true
+  editor:
+    preferredLineLength: 65
+    softWrapAtPreferredLineLength: true
 ".js.jsx.source":
   editor:
     showIndentGuide: true
