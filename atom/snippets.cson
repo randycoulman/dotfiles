@@ -60,11 +60,11 @@
             import reducer from '../reducer'
             import { nullAction } from 'testutils'
 
-            describe('errors reducer', () => {
+            describe('$1 reducer', () => {
               const initialState = reducer(undefined, nullAction)
 
-              describe('$1', () => {
-                $2
+              describe('$2', () => {
+                $3
               })
             })
 
@@ -86,12 +86,14 @@
   'Redux selectors':
     'prefix': 'rsel'
     'body': """
-            import { path } from 'ramda'
+            import { prop } from 'ramda'
 
-            const localState = path(['app', '$1'])
+            import { globalizeSelectors } from 'utils'
 
-            export default {
-            }
+            const localState = prop('$1')
+
+            export default globalizeSelectors(localState, {
+            })
 
             """
   'Component (React Native)':
