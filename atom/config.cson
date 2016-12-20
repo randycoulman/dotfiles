@@ -34,8 +34,7 @@
   "git-plus": {}
   "incremental-search":
     instantSearch: true
-  "language-babel":
-    autoIndentJSX: true
+  "language-babel": {}
   linter:
     showErrorTabLine: true
   "linter-eslint":
