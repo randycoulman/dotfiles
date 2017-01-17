@@ -11,6 +11,11 @@
   core:
     audioBeep: false
     destroyEmptyPanes: false
+    disabledPackages: [
+      "relative-numbers"
+      "vim-mode"
+      "vim-surround"
+    ]
     projectHome: "/Users/randy/src"
     telemetryConsent: "no"
     themes: [
@@ -31,7 +36,9 @@
   "git-blame": {}
   "git-diff":
     showIconsInEditorGutter: true
-  "git-plus": {}
+  "git-plus":
+    general:
+      _analyticsUserId: "7ca4701e-92e1-40b5-acae-87aad757c9d1"
   "incremental-search":
     instantSearch: true
   "language-babel": {}
