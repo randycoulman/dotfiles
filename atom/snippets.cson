@@ -21,6 +21,26 @@
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
 
 '.source.js':
+  'simple out':
+    'prefix': 'dout'
+    'body': """
+            const out = obj => {
+              console.log(obj)
+              return obj
+            }
+
+            """
+  'out with message':
+    'prefix': 'doutm'
+    'body': """
+            import { curry } from 'ramda'
+
+            const out = curry((msg, obj) => {
+              console.log(msg, obj)
+              return obj
+            })
+
+            """
   'Redux ActionType':
     'prefix': 'ract'
     'body': """
