@@ -72,7 +72,7 @@
   'Redux reducer action spec':
     'prefix': 'rrit'
     'body': """
-            context('$1', () => {
+            describe('$1', () => {
               const state = initialState
               const action = $2
               const newState = reducer(state, action)
