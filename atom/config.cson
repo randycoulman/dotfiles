@@ -3,6 +3,12 @@
     createDirectories: true
     fuzzyMatch: true
     helmDirSwitch: true
+  "atom-beautify":
+    css: {}
+    general:
+      analytics: false
+    json:
+      indent_size: 2
   "autocomplete-modules":
     babelPluginModuleAlias: true
     webpack: true

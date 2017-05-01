@@ -1,5 +1,6 @@
 packages: [
   "advanced-open-file"
+  "atom-beautify"
   "atom-react-native-autocomplete"
   "auto-indent"
   "auto-update-packages"
