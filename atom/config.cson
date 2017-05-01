@@ -48,14 +48,14 @@
   "incremental-search":
     instantSearch: true
   "language-babel": {}
-  linter:
-    showErrorTabLine: true
+  linter: {}
   "linter-eslint":
     fixOnSave: true
   "linter-rubocop":
     disableWhenNoConfigFile: true
   "linter-sass-lint":
     noConfigDisable: true
+  "linter-ui-default": {}
   "markdown-deluxe":
     fontFamily: "Hack"
   "package-sync":
