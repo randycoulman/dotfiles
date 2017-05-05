@@ -1,10 +1,10 @@
 packages: [
   "advanced-open-file"
   "atom-beautify"
+  "atom-elixir"
   "atom-react-native-autocomplete"
   "auto-indent"
   "auto-update-packages"
-  "autocomplete-elixir"
   "autocomplete-modules"
   "busy-signal"
   "color-picker"
