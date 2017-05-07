@@ -6,5 +6,5 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 if [ -x /usr/local/bin/icdiff ]; then
-  alias diff icdiff
+  alias diff="icdiff"
 fi
