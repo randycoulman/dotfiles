@@ -51,6 +51,8 @@
     disableWhenNoConfigFile: true
   "linter-sass-lint":
     noConfigDisable: true
+  "linter-ui-default":
+    showPanel: true
   "markdown-deluxe":
     fontFamily: "Hack"
   "package-sync":
