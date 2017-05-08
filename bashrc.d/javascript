@@ -1,7 +1,3 @@
-which yarn
-
 if [ -x $(which yarn) ]; then
-  echo "Adding yarn global bin to PATH"
-  echo $(yarn global bin)
   export PATH=$PATH:$(yarn global bin)
 fi
