@@ -24,6 +24,7 @@ packages: [
   "language-javascript-jsx"
   "language-plantuml"
   "linter"
+  "linter-elixir-credo"
   "linter-eslint"
   "linter-rubocop"
   "linter-sass-lint"
