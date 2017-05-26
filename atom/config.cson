@@ -16,6 +16,7 @@
       "vim-mode"
       "vim-surround"
     ]
+    packagesWithKeymapsDisabled: []
     projectHome: "/Users/randy/src"
     telemetryConsent: "no"
     themes: [
@@ -39,6 +40,8 @@
   "git-plus":
     general:
       _analyticsUserId: "7ca4701e-92e1-40b5-acae-87aad757c9d1"
+  "hey-pane":
+    expandedWidth: 75
   "incremental-search":
     instantSearch: true
   "language-babel": {}
