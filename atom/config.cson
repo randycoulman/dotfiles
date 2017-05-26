@@ -62,6 +62,10 @@
   "platformio-ide-terminal":
     toggles:
       autoClose: true
+  "prettier-atom":
+    formatOnSaveOptions:
+      enabled: true
+    silenceErrors: true
   "project-manager":
     environmentSpecificProjects: true
     includeGitRepositories: true

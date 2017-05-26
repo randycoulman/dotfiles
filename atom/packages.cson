@@ -36,6 +36,7 @@ packages: [
   "pigments"
   "plantuml-preview"
   "platformio-ide-terminal"
+  "prettier-atom"
   "project-manager"
   "ramda-repl"
   "react-es6-snippets"
