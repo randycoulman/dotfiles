@@ -45,7 +45,6 @@ packages: [
   "smart-tab-name"
   "sort-lines"
   "split-diff"
-  "synced-sidebar"
   "toggle-quotes"
   "vim-mode"
   "vim-surround"

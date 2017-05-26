@@ -81,7 +81,10 @@
     style: {}
   "toggle-quotes": {}
   "tree-view":
+    alwaysOpenExisting: true
+    autoReveal: true
     sortFoldersBeforeFiles: false
+    squashDirectoryNames: true
   "vim-mode":
     startInInsertMode: true
   welcome:
