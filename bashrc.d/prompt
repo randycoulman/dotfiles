@@ -1,9 +1,10 @@
-if [ -x $HOME/bin/git-prompt.sh ]
+BGP="$(brew --prefix)/opt/bash-git-prompt/share"
+
+if [ -f "$BGP/gitprompt.sh" ]
 then
-    . $HOME/bin/git-prompt.sh
-elif [ -x $HOME/bin/liquidprompt ]
-then
-    [[ $- = *i* ]] && source $HOME/bin/liquidprompt
+    __GIT_PROMPT_DIR=$BGP
+    GIT_PROMPT_THEME=Custom
+    source "$BGP/gitprompt.sh"
 else
     # set a fancy prompt (non-color, unless we know we "want" color)
     case "$TERM" in
