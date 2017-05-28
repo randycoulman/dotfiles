@@ -55,6 +55,7 @@
   "linter-sass-lint":
     noConfigDisable: true
   "linter-ui-default":
+    panelHeight: 69
     showPanel: true
   "markdown-deluxe":
     fontFamily: "Hack"
