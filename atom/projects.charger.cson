@@ -1,1 +1,9 @@
-[]
+[
+  {
+    title: "Contactulator All"
+    paths: [
+      "/Users/randy/src/zeal/contactulator_backend"
+      "/Users/randy/src/zeal/contactulator_mobile"
+    ]
+  }
+]
