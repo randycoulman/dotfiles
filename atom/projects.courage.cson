@@ -1,1 +1,9 @@
-[]
+[
+  {
+    title: "OPCUA-All"
+    paths: [
+      "/Users/randy/src/github/node-opcua"
+      "/Users/randy/Documents/Projects/OPCUA/WSDL-1.03"
+    ]
+  }
+]
