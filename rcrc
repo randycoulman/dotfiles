@@ -1,2 +1,2 @@
-EXCLUDES="README.md LICENSE"
+EXCLUDES="README.md LICENSE setupMachine.sh"
 SYMLINK_DIRS="atom bashrc.d emacs.d"
