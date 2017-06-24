@@ -24,7 +24,7 @@
       "one-light-syntax"
     ]
   editor:
-    fontFamily: "Hack"
+    fontFamily: "Inconsolata"
     fontSize: 20
     invisibles: {}
     tabType: "soft"
