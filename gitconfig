@@ -7,7 +7,6 @@
   ci = commit
   cl = clone
   co = checkout
-  diff = icdiff
   dc = diff --cached
   dt = difftool
   dtc = difftool --cached
