@@ -60,6 +60,7 @@
   "markdown-deluxe":
     fontFamily: "Hack"
   "package-sync":
+    createOnChange: true
     forceOverwrite: true
   "plantuml-preview":
     jarLocation: "/Users/randy/bin/plantuml.jar"
