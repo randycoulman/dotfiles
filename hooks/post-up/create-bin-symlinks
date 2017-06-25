@@ -5,3 +5,4 @@ ln -sf /Applications/Meld.app/Contents/MacOS/Meld $HOME/bin/meld
 
 # This one doesn't work as a symlink - VW can't find the VisualWorks.ini file
 cp $HOME/Visualworks8.2/preview/bin/VisualWorks.sh $HOME/bin/visual
+chmod u+w $HOME/bin/visual
