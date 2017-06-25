@@ -34,7 +34,6 @@
 [core]
 	quotepath = off
 	excludesfile = /Users/randy/.gitignore_global
-  editor = atom --wait
 
 [diff]
   compactionHeuristic = true

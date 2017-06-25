@@ -1,1 +1,1 @@
-export EDITOR=$HOME/bin/edit
+export EDITOR="atom --wait"
