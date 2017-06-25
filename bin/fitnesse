@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd $HOME/fitnesse
+java -jar fitnesse.jar -p 8000

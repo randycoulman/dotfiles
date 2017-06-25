@@ -1,0 +1,9 @@
+#!/bin/sh
+
+FILE=/tmp/fakeFitServer.doit
+
+echo $* > $FILE
+while [ -f $FILE ]
+do 
+   sleep 1
+done
