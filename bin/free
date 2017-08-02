@@ -1,0 +1,3 @@
+#!/bin/sh
+
+launchctl $1 com.randycoulman.FreedomAccount

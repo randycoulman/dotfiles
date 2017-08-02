@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ln -sf $HOME/.plists/com.randycoulman.FreedomAccount.plist $HOME/Library/LaunchAgents/
