@@ -33,7 +33,6 @@ packages: [
   "list-edit"
   "local-history"
   "markdown-scroll-sync"
-  "merge-conflicts"
   "package-sync"
   "pigments"
   "plantuml-preview"
