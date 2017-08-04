@@ -15,6 +15,7 @@
       "relative-numbers"
       "vim-mode"
       "vim-surround"
+      "language-gfm"
     ]
     packagesWithKeymapsDisabled: []
     projectHome: "/Users/randy/src"

@@ -23,6 +23,7 @@ packages: [
   "language-babel"
   "language-elixir"
   "language-javascript-jsx"
+  "language-markdown"
   "language-plantuml"
   "linter"
   "linter-elixir-credo"
