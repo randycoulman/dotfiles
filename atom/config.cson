@@ -116,6 +116,9 @@
 ".languagebabel.ttlextension":
   editor:
     showIndentGuide: true
+".md.text":
+  editor:
+    softWrapAtPreferredLineLength: true
 "source.gfm":
   editor:
     softWrap: true
