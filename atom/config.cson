@@ -13,8 +13,6 @@
     destroyEmptyPanes: false
     disabledPackages: [
       "relative-numbers"
-      "vim-mode"
-      "vim-surround"
     ]
     packagesWithKeymapsDisabled: []
     projectHome: "/Users/randy/src"
@@ -91,6 +89,8 @@
     sortFoldersBeforeFiles: false
     squashDirectoryNames: true
   "vim-mode":
+    startInInsertMode: true
+  "vim-mode-plus":
     startInInsertMode: true
   welcome:
     showOnStartup: false

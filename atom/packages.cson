@@ -47,6 +47,5 @@ packages: [
   "sort-lines"
   "split-diff"
   "toggle-quotes"
-  "vim-mode"
-  "vim-surround"
+  "vim-mode-plus"
 ]
