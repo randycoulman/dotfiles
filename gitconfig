@@ -5,7 +5,6 @@
 [alias]
   br = branch
   ci = commit
-  cl = clone
   co = checkout
   dc = diff --cached
   dt = difftool
@@ -14,7 +13,7 @@
   fixpair = commit --amend --reset-author --no-edit
   hist = log --color --graph --format=\"%Cred%h%Creset |%C(bold yellow)%d%Creset %s %Cgreen(%ar)%Creset %C(bold blue)<%an/%cn>%Creset\"
   mt = mergetool
-  pullff = pull --ff-only
+  pushf = push --force-with-lease
   st = status
   sync = !git co master && git pull && git fetch --all -p && git snip --full -n
   syncf = snip --full -f
