@@ -71,6 +71,10 @@
   "prettier-atom":
     formatOnSaveOptions:
       enabled: true
+      isDisabledIfNoConfigFile: true
+      isDisabledIfNotInPackageJson: true
+    prettierOptions:
+      singleQuote: true
     silenceErrors: true
   "project-manager":
     environmentSpecificProjects: true
