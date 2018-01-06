@@ -2,6 +2,7 @@ packages: [
   "advanced-open-file"
   "atom-beautify"
   "atom-elixir"
+  "atom-elixir-formatter"
   "atom-react-native-autocomplete"
   "auto-indent"
   "auto-update-packages"
