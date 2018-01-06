@@ -68,7 +68,7 @@
     createOnChange: true
     forceOverwrite: true
   "plantuml-preview":
-    jarLocation: "/Users/randy/bin/plantuml.jar"
+    jarLocation: "/usr/local/opt/plantuml/libexec/plantuml.jar"
   "platformio-ide-terminal":
     toggles:
       autoClose: true
