@@ -47,6 +47,7 @@ packages: [
   "smart-tab-name"
   "sort-lines"
   "split-diff"
+  "teletype"
   "toggle-quotes"
   "vim-mode-plus"
 ]
