@@ -6,6 +6,8 @@
   "autocomplete-modules":
     babelPluginModuleAlias: true
     webpack: true
+  "autocomplete-plus":
+    confirmCompletion: "tab always, enter when suggestion explicitly selected"
   autosave:
     enabled: true
   core:
