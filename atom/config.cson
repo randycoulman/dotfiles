@@ -4,9 +4,8 @@
     fuzzyMatch: true
     helmDirSwitch: true
   "atom-elixir-formatter":
-    elixirExecutable: "/Users/randy/.asdf/installs/elixir/1.6.0-rc.0/bin/elixir"
+    elixirExecutable: "/Users/randy/.asdf/installs/elixir/1.6.0/bin/elixir"
     formatOnSave: "whenFormatterFilePresent"
-    showErrorNotifications: false
   "autocomplete-modules":
     babelPluginModuleAlias: true
     webpack: true
