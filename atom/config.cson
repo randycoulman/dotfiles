@@ -113,25 +113,58 @@
 ".babel.regexp.source":
   editor:
     showIndentGuide: true
+".basic.html.text":
+  editor:
+    autoIndentOnPaste: false
+".c.source":
+  editor:
+    autoIndentOnPaste: false
+".css.source":
+  editor:
+    autoIndentOnPaste: false
 ".css.source.styled":
   editor:
     showIndentGuide: true
+".elixir.text":
+  editor:
+    autoIndentOnPaste: false
+".elm.source":
+  editor:
+    autoIndentOnPaste: false
+".gemfile.ruby.source":
+  editor:
+    autoIndentOnPaste: false
 ".gfm.source":
   editor:
     softWrapAtPreferredLineLength: true
 ".git-commit.text":
   editor:
+    autoIndentOnPaste: false
     preferredLineLength: 65
     softWrapAtPreferredLineLength: true
+".html.ruby.text":
+  editor:
+    autoIndentOnPaste: false
 ".js.jsx.source":
   editor:
+    autoIndentOnPaste: false
     showIndentGuide: true
+".js.source":
+  editor:
+    autoIndentOnPaste: false
 ".languagebabel.ttlextension":
   editor:
     showIndentGuide: true
 ".md.text":
   editor:
+    autoIndentOnPaste: false
     softWrapAtPreferredLineLength: true
+".plantuml.source":
+  editor:
+    autoIndentOnPaste: false
+".shell.source":
+  editor:
+    autoIndentOnPaste: false
 "source.gfm":
   editor:
     softWrap: true
