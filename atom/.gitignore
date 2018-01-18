@@ -8,3 +8,4 @@ packages/
 projects.cson
 blob-store/
 git-time-machine/
+recovery/
