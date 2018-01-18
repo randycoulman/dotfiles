@@ -32,6 +32,8 @@
     fontSize: 20
     invisibles: {}
     tabType: "soft"
+  elmjutsu:
+    cacheDirectory: "/var/folders/kv/9khxbrpn5pb_3g080hd5qq8m0000gn/T/elmjutsu48953ISJRI9Oje2Kv"
   emmet: {}
   "exception-reporting":
     userId: "30e6f2d0-42d3-ab77-4984-dde4c431f019"
@@ -49,9 +51,12 @@
   "incremental-search":
     instantSearch: true
   "language-babel": {}
+  "language-elm":
+    autocompleteEnabled: false
   linter: {}
   "linter-elixir-credo":
     flags: "--strict"
+  "linter-elm-make": {}
   "linter-eslint":
     fixOnSave: true
   "linter-rubocop":
@@ -59,7 +64,6 @@
   "linter-sass-lint":
     noConfigDisable: true
   "linter-ui-default":
-    panelHeight: 69
     showPanel: true
   "markdown-deluxe":
     fontFamily: "Hack"
