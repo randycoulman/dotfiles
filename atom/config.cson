@@ -59,6 +59,7 @@
   "linter-elm-make": {}
   "linter-eslint":
     fixOnSave: true
+    ignoreFixableRulesWhileTyping: true
   "linter-rubocop":
     disableWhenNoConfigFile: true
   "linter-sass-lint":
