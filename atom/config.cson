@@ -96,6 +96,9 @@
   "terminal-plus":
     core: {}
     style: {}
+  "terminal-tab":
+    defaultLocation: "right"
+    matchTheme: false
   "toggle-quotes": {}
   "tree-view":
     alwaysOpenExisting: true
