@@ -43,7 +43,6 @@ packages: [
   "plantuml-preview"
   "prettier-atom"
   "project-manager"
-  "ramda-repl"
   "react-es6-snippets"
   "relative-numbers"
   "ruby-test"
