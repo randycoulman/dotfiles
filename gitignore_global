@@ -2,4 +2,4 @@
 .DS_Store
 .idea/
 /.elixir_ls/
-
+/.vscode/
