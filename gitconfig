@@ -33,21 +33,17 @@
 [core]
 	quotepath = off
 	excludesfile = /Users/randy/.gitignore_global
+	editor = code --wait
 
 [diff]
   compactionHeuristic = true
-  tool = kdiff3
+  tool = code
 
 [difftool]
   prompt = false
 
-[difftool "kdiff3"]
-  path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
-  trustExitCode = false
-
-[difftool "sourcetree"]
-	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$LOCAL\" \"$REMOTE\"
-	path =
+[difftool "code"]
+	cmd = code --wait --diff \"$LOCAL\" \"$REMOTE\"
 
 [format]
   pretty = fuller
