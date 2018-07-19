@@ -3,3 +3,4 @@
 .idea/
 /.elixir_ls/
 /.vscode/
+/.venv*
