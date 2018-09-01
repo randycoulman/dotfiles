@@ -1,0 +1,2 @@
+alias brout="brew update && brew outdated"
+alias brup="brew upgrade && brew cleanup"
