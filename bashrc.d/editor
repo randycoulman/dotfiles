@@ -1,1 +1,1 @@
-export EDITOR="atom-beta --wait"
+export EDITOR="code --wait"
