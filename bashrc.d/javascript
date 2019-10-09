@@ -8,7 +8,7 @@ alias nl="npm run lint"
 alias nr="npm run"
 alias ns="npm start"
 alias nt="npm test"
-alias ntw="npm test:watch"
+alias ntw="npm run test:watch"
 
 alias ya="yarn add"
 alias yad="yarn add --dev"
