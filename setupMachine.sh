@@ -68,6 +68,7 @@ install_cask_packages() {
   cask_install meld
   cask_install nvalt
   cask_install postman
+  cask_install quicklook-json
   cask_install sizeup
   cask_install skitch
   cask_install skype
