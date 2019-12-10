@@ -1,0 +1,2 @@
+alias mps="mix phx.server"
+alias mtw="mix test.watch --stale"
