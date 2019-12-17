@@ -1,7 +1,3 @@
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
 
-if [ -f $(brew --prefix)/etc/bash_completion ] && ! shopt -oq posix; then
-    . $(brew --prefix)/etc/bash_completion
-fi
+[[ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
