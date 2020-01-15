@@ -35,7 +35,7 @@
 
 [core]
 	quotepath = off
-	excludesfile = /Users/randy/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = code --wait
 
 [diff]
