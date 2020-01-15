@@ -19,6 +19,7 @@ ensure_brew_installed() {
 
 install_brew_packages() {
   brew_install bash
+  brew_install bash-completion@2
   brew_install bash-git-prompt
   brew_install coreutils
   brew_install git
@@ -57,20 +58,14 @@ setup_dotfiles() {
 install_cask_packages() {
   brew tap caskroom/fonts
   cask_install alfred
-  cask_install atom
-  cask_install crashplan
   cask_install dash
-  cask_install evernote
   cask_install font-inconsolata
-  cask_install github-desktop
   cask_install libreoffice
-  cask_install marked
   cask_install meld
   cask_install nvalt
   cask_install postman
   cask_install quicklook-json
   cask_install sizeup
-  cask_install skitch
   cask_install skype
   cask_install sweet-home3d
   cask_install thunderbird
