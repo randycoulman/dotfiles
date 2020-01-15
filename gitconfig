@@ -1,6 +1,5 @@
-[user]
-	name = Randy Coulman
-	email = rcoulman@gmail.com
+[include]
+  path = .gitconfig.local
 
 [alias]
   br = branch
