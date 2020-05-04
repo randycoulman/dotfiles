@@ -1,2 +1,4 @@
+export PLUG_EDITOR="vscode://file/__FILE__:__LINE__"
+
 alias mps="mix phx.server"
 alias mtw="mix test.watch --stale"
