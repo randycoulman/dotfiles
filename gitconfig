@@ -36,6 +36,7 @@
 	quotepath = off
 	excludesfile = ~/.gitignore_global
 	editor = code --wait
+  pager = delta --dark
 
 [diff]
   compactionHeuristic = true
@@ -49,6 +50,9 @@
 
 [format]
   pretty = fuller
+
+[interactive]
+  diffFilter = delta --dark --color-only
 
 [mergetool]
   prompt = false
