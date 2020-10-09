@@ -1,16 +1,38 @@
 alias gbr="git branch"
+__git_complete gbr _git_branch
+
 alias gd="git diff"
 alias gdc="git diff --cached"
+__git_complete gd _git_diff
+__git_complete gdc _git_diff
+
 alias gdt="git difftool"
 alias gdtc="git difftool --cached"
+__git_complete gdt _git_difftool
+__git_complete gdtc _git_difftool
+
 alias gl="git hist"
 alias gll="git log"
+__git_complete gl _git_log
+__git_complete gll _git_log
+
 alias gp="git push"
 alias gpf="git push --force-with-lease"
 alias gpu="git push -u"
+__git_complete gp _git_push
+__git_complete gpf _git_push
+__git_complete gpu _git_push
+
 alias gr="git rebase"
 alias gra="git rebase --abort"
 alias grc="git rebase --continue"
 alias gri="git rebase --interactive"
 alias grs="git rebase --skip"
+__git_complete gr _git_rebase
+__git_complete gra _git_rebase
+__git_complete grc _git_rebase
+__git_complete gri _git_rebase
+__git_complete grs _git_rebase
+
 alias gst="git status"
+__git_complete gst _git_status
