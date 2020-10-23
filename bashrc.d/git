@@ -36,12 +36,16 @@ __git_complete grs _git_rebase
 
 alias gs="git stash"
 alias gsa="git stash apply"
+alias gsd="git stash drop"
 alias gsl="git stash list"
 alias gsp="git stash pop"
+alias gss="git stash show"
 __git_complete gs _git_stash
 __git_complete gsa _git_stash
+__git_complete gsd _git_stash
 __git_complete gsl _git_stash
 __git_complete gsp _git_stash
+__git_complete gss _git_stash
 
 alias gst="git status"
 __git_complete gst _git_status
