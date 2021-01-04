@@ -4,3 +4,5 @@ export PATH="$HOME/.asdf/bin:$PATH"
 
 source $HOME/.asdf/completions/asdf.bash
 eval "$(asdf exec direnv hook bash)"
+
+direnv() { asdf exec direnv "$@"; }
