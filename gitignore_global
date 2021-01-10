@@ -4,3 +4,4 @@
 /.elixir_ls/
 /.vscode/
 /.venv*
+/.envrc
