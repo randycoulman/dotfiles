@@ -85,5 +85,5 @@ gsync()
 gsyncf()
 {
   main=$(_main_branch)
-  git snip --target $main --full -n
+  git snip --target $main --full -f
 }
