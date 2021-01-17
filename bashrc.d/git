@@ -49,3 +49,41 @@ __git_complete gss _git_stash
 
 alias gst="git status"
 __git_complete gst _git_status
+
+_main_branch()
+{
+  git config sync.mainBranch || _cache_main_branch
+}
+
+_cache_main_branch()
+{
+  branch=$(_find_main_branch)
+  git config sync.mainBranch $branch
+  echo $branch
+}
+
+_find_main_branch()
+{
+  gh api repos/:owner/:repo | jq -r .default_branch
+}
+
+gffm()
+{
+  main=$(_main_branch)
+  git fetch origin $main:$main
+}
+
+gsync()
+{
+  main=$(_main_branch)
+  git fetch --all -p
+  git co $main
+  git pull
+  git snip --target $main --full -n
+}
+
+gsyncf()
+{
+  main=$(_main_branch)
+  git snip --target $main --full -n
+}

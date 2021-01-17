@@ -17,8 +17,6 @@
   mt = mergetool
   pushf = push --force-with-lease
   st = status
-  sync = !git co master && git pull && git fetch --all -p && git snip --full -n
-  syncf = snip --full -f
 
 [color]
 	branch = auto
