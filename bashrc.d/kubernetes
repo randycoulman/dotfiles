@@ -1,0 +1,8 @@
+alias k="kubectl"
+alias kgp="kubectl get pods"
+alias kgpa="kubectl get pods -A"
+alias kgpn="kubectl get pods -n"
+alias kl="kubectl logs"
+alias kln="kubectl logs -n"
+alias krmp="kubectl delete pod"
+alias krmpn="kubectl delete pod -n"
