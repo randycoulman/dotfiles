@@ -1,0 +1,7 @@
+SDK="$(brew --caskroom)/google-cloud-sdk"
+
+if [ -d "$SDK" ]
+then
+  source "$SDK/latest/google-cloud-sdk/completion.bash.inc"
+  source "$SDK/latest/google-cloud-sdk/path.bash.inc"
+fi
