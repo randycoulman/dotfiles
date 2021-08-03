@@ -1,5 +1,4 @@
-# Commented out per https://github.com/asdf-community/asdf-direnv#setup
-# source $HOME/.asdf/asdf.sh
+source $HOME/.asdf/asdf.sh
 export PATH="$HOME/.asdf/bin:$PATH"
 
 source $HOME/.asdf/completions/asdf.bash
