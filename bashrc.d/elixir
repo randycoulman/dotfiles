@@ -1,3 +1,5 @@
+export ELIXIR_EDITOR="code -g __FILE__:__LINE__"
+export ECTO_EDITOR=$ELIXIR_EDITOR
 export PLUG_EDITOR="vscode://file/__FILE__:__LINE__"
 
 alias mps="mix phx.server"
