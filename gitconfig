@@ -37,6 +37,7 @@
   pager = delta --dark
 
 [diff]
+  algorithm = histogram
   compactionHeuristic = true
   tool = code
 
