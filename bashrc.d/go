@@ -1,0 +1,6 @@
+GOBIN="$HOME/go/bin"
+
+if [ -d "$GOBIN" ]
+then
+  export PATH="$GOBIN:$PATH"
+fi
