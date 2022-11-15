@@ -21,12 +21,16 @@ install_brew_packages() {
   brew_install bash
   brew_install bash-completion@2
   brew_install bash-git-prompt
+  brew_install bat
   brew_install coreutils
+  brew_install fop
+  brew_install gh
   brew_install git
+  brew_install git-delta
   brew_install gpg  # Needed for asdf nodejs plugin
-  cask_install java
-  brew_install plantuml
-  brew_install sqlite
+  brew_install jq
+  brew_install unixodbc
+  brew_install wxwidgets
 }
 
 install_asdf() {
@@ -56,20 +60,12 @@ setup_dotfiles() {
 }
 
 install_cask_packages() {
-  brew tap caskroom/fonts
-  cask_install alfred
-  cask_install dash
+  brew tap homebrew/cask-fonts
   cask_install font-inconsolata
   cask_install libreoffice
-  cask_install meld
-  cask_install nvalt
-  cask_install postman
   cask_install quicklook-json
-  cask_install sizeup
-  cask_install skype
   cask_install sweet-home3d
   cask_install thunderbird
-  cask_install virtualbox
 }
 
 ensure_asdf_installed() {
@@ -85,8 +81,8 @@ install_asdf_plugins() {
 }
 
 install_asdf_languages() {
-  asdf_install elixir 1.4.5
-  asdf_install erlang 19.3
+  asdf_install elixir 1.14.1-otp-25
+  asdf_install erlang 25.1.1
   if ! asdf list nodejs > /dev/null
   then
     bash /usr/local/opt/asdf/plugins/nodejs/bin/import-release-team-keyring
