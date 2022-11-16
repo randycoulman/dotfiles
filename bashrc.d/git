@@ -72,6 +72,13 @@ _find_main_branch()
   gh api repos/:owner/:repo | jq -r .default_branch
 }
 
+_snip()
+{
+  main=$(_main_branch)
+  root=$(git rev-parse --show-toplevel)
+  (cd $root; git snip --target $main --full "$@")
+}
+
 gffm()
 {
   main=$(_main_branch)
@@ -81,14 +88,13 @@ gffm()
 gsync()
 {
   main=$(_main_branch)
-  git fetch --all -p
-  git co $main
+  git fetch origin -p
+  git switch $main
   git pull
-  git snip --target $main --full -n
+  _snip -n
 }
 
 gsyncf()
 {
-  main=$(_main_branch)
-  git snip --target $main --full -f
+  _snip -f
 }
