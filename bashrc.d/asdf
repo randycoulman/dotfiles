@@ -1,7 +1,5 @@
-source $HOME/.asdf/asdf.sh
-export PATH="$HOME/.asdf/bin:$PATH"
-
-source $HOME/.asdf/completions/asdf.bash
-eval "$(asdf exec direnv hook bash)"
+ASDF=$(brew --prefix)/opt/asdf
+source $ASDF/libexec/asdf.sh
+export PATH="$ASDF/bin:$PATH"
 
 direnv() { asdf exec direnv "$@"; }

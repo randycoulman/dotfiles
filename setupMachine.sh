@@ -13,7 +13,7 @@ main() {
 ensure_brew_installed() {
   if ! [ -x $(which brew) ]
   then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 }
 
@@ -42,11 +42,11 @@ install_asdf() {
 install_global_gems() {
   gem_install bundler
   gem_install git_snip
-  gem_install pair-up
 }
 
 install_global_node_modules() {
-  npm_install -g yarn
+  npm_install yarn
+  npm_install git-mob
 }
 
 setup_dotfiles() {
@@ -62,6 +62,7 @@ setup_dotfiles() {
 install_cask_packages() {
   brew tap homebrew/cask-fonts
   cask_install font-inconsolata
+  cask_install font-source-code-pro
   cask_install libreoffice
   cask_install quicklook-json
   cask_install sweet-home3d
@@ -82,13 +83,13 @@ install_asdf_plugins() {
 
 install_asdf_languages() {
   asdf_install elixir 1.14.1-otp-25
-  asdf_install erlang 25.1.1
+  asdf_install erlang 25.2
   if ! asdf list nodejs > /dev/null
   then
     bash /usr/local/opt/asdf/plugins/nodejs/bin/import-release-team-keyring
-    asdf_install nodejs 8.1.2
+    asdf_install nodejs 18.12.1
   fi
-  asdf_install ruby 2.4.1
+  asdf_install ruby 3.1.3
 }
 
 install_asdf_plugin() {
@@ -111,9 +112,9 @@ brew_install() {
 
 cask_install() {
   package=$1
-  if ! brew cask ls $package > /dev/null
+  if ! brew ls --cask $package > /dev/null
   then
-    brew cask install $package
+    brew install --cask $package
   fi
 }
 
