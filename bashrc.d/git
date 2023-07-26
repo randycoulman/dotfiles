@@ -50,6 +50,9 @@ __git_complete gss _git_stash
 alias gst="git status"
 __git_complete gst _git_status
 
+alias gsu="git submodule update"
+__git_complete gsu _git_submodule
+
 alias gsw="git switch"
 alias gswc="git switch -c"
 __git_complete gsw _git_switch
