@@ -1,2 +1,0 @@
-alias prod="heroku ps:exec -a quartz-two-prod"
-alias stag="heroku ps:exec -a quartz-two-acc"

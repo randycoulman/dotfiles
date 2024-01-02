@@ -33,6 +33,16 @@ install_brew_packages() {
   brew_install wxwidgets
 }
 
+setup_dotfiles() {
+  brew tap thoughtbot/formulae
+  brew_install rcm
+  if ! [ -e $HOME/.dotfiles ]
+  then
+    ( cd $HOME; git clone git@github.com:randycoulman/dotfiles.git .dotfiles )
+  fi
+  ( cd $HOME/.dotfiles; rcup rcrc; rcup )
+}
+
 install_asdf() {
   ensure_asdf_installed
   install_asdf_plugins
@@ -49,24 +59,14 @@ install_global_node_modules() {
   npm_install git-mob
 }
 
-setup_dotfiles() {
-  brew tap thoughtbot/formulae
-  brew_install rcm
-  if ! [ -e $HOME/.dotfiles ]
-  then
-    ( cd $HOME; git clone git@github.com:randycoulman/dotfiles.git .dotfiles )
-  fi
-  ( cd $HOME/.dotfiles; rcup rcrc; rcup )
-}
-
 install_cask_packages() {
   brew tap homebrew/cask-fonts
-  cask_install font-inconsolata
-  cask_install font-source-code-pro
-  cask_install libreoffice
-  cask_install quicklook-json
-  cask_install sweet-home3d
-  cask_install thunderbird
+  brew_install font-inconsolata
+  brew_install font-source-code-pro
+  brew_install libreoffice
+  brew_install quicklook-json
+  brew_install sweet-home3d
+  brew_install thunderbird
 }
 
 ensure_asdf_installed() {
@@ -82,8 +82,8 @@ install_asdf_plugins() {
 }
 
 install_asdf_languages() {
-  asdf_install elixir 1.14.1-otp-25
-  asdf_install erlang 25.2
+  asdf_install elixir 1.16.0-otp-26
+  asdf_install erlang 26.2.1
   if ! asdf list nodejs > /dev/null
   then
     bash /usr/local/opt/asdf/plugins/nodejs/bin/import-release-team-keyring
@@ -107,14 +107,6 @@ brew_install() {
   if ! brew ls $package > /dev/null
   then
     brew install $package
-  fi
-}
-
-cask_install() {
-  package=$1
-  if ! brew ls --cask $package > /dev/null
-  then
-    brew install --cask $package
   fi
 }
 
