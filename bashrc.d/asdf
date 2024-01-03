@@ -2,4 +2,6 @@ ASDF=$(brew --prefix)/opt/asdf
 source $ASDF/libexec/asdf.sh
 export PATH="$ASDF/bin:$PATH"
 
-direnv() { asdf exec direnv "$@"; }
+if asdf list direnv > /dev/null 2>&1; then
+  direnv() { asdf exec direnv "$@"; }
+fi
