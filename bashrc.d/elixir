@@ -3,6 +3,14 @@ export ECTO_EDITOR=$ELIXIR_EDITOR
 export KERL_BUILD_DOCS=yes
 export PLUG_EDITOR="vscode://file/__FILE__:__LINE__"
 
+alias mc="mix credo"
+alias md="mix dialyzer"
+alias mdg="mix deps.get"
+alias mdu="mix deps.update"
 alias mps="mix phx.server"
+alias mt="mix test"
+alias mtf="mix test --failed"
 alias mti="mix test.interactive --stale"
+alias mts="mix test --stale"
+alias mtt="mix test --trace"
 alias mtw="mix test.watch --stale"
