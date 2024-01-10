@@ -5,7 +5,6 @@ main() {
   install_brew_packages
   setup_dotfiles
   install_asdf
-  install_global_gems
   install_global_node_modules
   install_cask_packages
 }
@@ -49,11 +48,6 @@ install_asdf() {
   install_asdf_languages
 }
 
-install_global_gems() {
-  gem_install bundler
-  gem_install git_snip
-}
-
 install_global_node_modules() {
   npm_install yarn
   npm_install git-mob
@@ -78,7 +72,6 @@ install_asdf_plugins() {
   install_asdf_plugin elixir
   install_asdf_plugin erlang
   install_asdf_plugin nodejs
-  install_asdf_plugin ruby
 }
 
 install_asdf_languages() {
@@ -89,7 +82,6 @@ install_asdf_languages() {
     bash /usr/local/opt/asdf/plugins/nodejs/bin/import-release-team-keyring
     asdf_install nodejs 18.12.1
   fi
-  asdf_install ruby 3.1.3
 }
 
 install_asdf_plugin() {

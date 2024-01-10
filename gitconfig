@@ -86,3 +86,5 @@
   process = git-lfs filter-process
 [init]
   defaultBranch = main
+[commit]
+	template = /Users/randy/.gitmessage
