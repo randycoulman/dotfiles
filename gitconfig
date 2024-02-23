@@ -47,8 +47,14 @@
 [difftool "code"]
   cmd = code --wait --diff \"$LOCAL\" \"$REMOTE\"
 
+[fetch]
+  prune = true
+
 [format]
   pretty = fuller
+
+[init]
+  defaultBranch = main
 
 [interactive]
   diffFilter = delta --dark --color-only
@@ -62,6 +68,7 @@
 
 [push]
   default = current
+  autoSetupRemote = true
 
 [pull]
   rebase = true
@@ -69,6 +76,7 @@
 [rebase]
   autoSquash = true
   autoStash = true
+  updateRefs = true
 
 [stash]
   showPatch = true
@@ -84,7 +92,5 @@
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
-[init]
-  defaultBranch = main
 [commit]
 	template = /Users/randy/.gitmessage
