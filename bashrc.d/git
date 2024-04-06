@@ -1,5 +1,7 @@
 alias gbr="git branch"
+alias gbra="git branches"
 __git_complete gbr _git_branch
+__git_complete gbra _git_branch
 
 alias gd="git diff"
 alias gdc="git diff --cached"
