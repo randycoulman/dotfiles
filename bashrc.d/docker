@@ -1,4 +1,4 @@
-alias dc="docker-compose"
+alias dc="docker compose"
 alias dcdown="dc down"
 alias dcl="dc logs"
 alias dclf="dcl -f"
