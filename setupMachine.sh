@@ -28,6 +28,7 @@ install_brew_packages() {
   brew_install git-delta
   brew_install gpg  # Needed for asdf nodejs plugin
   brew_install jq
+  brew_install rlwrap
   brew_install unixodbc
   brew_install wxwidgets
 }
