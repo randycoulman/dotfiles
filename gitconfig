@@ -14,9 +14,11 @@
   fixall = rebase -i -x \"git fixpair -CHEAD\"
   fixf = commit --amend --no-edit
   fixpair = commit --amend --reset-author --no-edit
-  hist = log --color --graph --format=\"%Cred%h%Creset |%C(bold yellow)%d%Creset %s %Cgreen(%ar)%Creset %C(bold blue)<%an/%cn>%Creset\"
+  hist = log --color --ext-diff --graph --format=\"%Cred%h%Creset |%C(bold yellow)%d%Creset %s %Cgreen(%ar)%Creset %C(bold blue)<%an/%cn>%Creset\"
+  lg = log --ext-diff
   mt = mergetool
   pushf = push --force-with-lease
+  sh = show --ext-diff
   st = status
 
 [color]
@@ -40,6 +42,7 @@
 [diff]
   algorithm = histogram
   compactionHeuristic = true
+  external = difft
   tool = code
 
 [difftool]

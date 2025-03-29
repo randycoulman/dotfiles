@@ -22,6 +22,7 @@ install_brew_packages() {
   brew_install bash-git-prompt
   brew_install bat
   brew_install coreutils
+  brew_install difftastic
   brew_install fop
   brew_install gh
   brew_install git

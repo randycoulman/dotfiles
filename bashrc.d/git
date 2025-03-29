@@ -14,7 +14,7 @@ __git_complete gdt _git_difftool
 __git_complete gdtc _git_difftool
 
 alias gl="git hist"
-alias gll="git log"
+alias gll="git lg"
 __git_complete gl _git_log
 __git_complete gll _git_log
 
