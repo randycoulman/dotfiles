@@ -1,1 +1,6 @@
 export EDITOR="code --wait"
+if command -v cursor >/dev/null 2>&1; then
+    export EDITOR="cursor --wait"
+else
+    export EDITOR="code --wait"
+fi
