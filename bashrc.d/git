@@ -1,7 +1,9 @@
 alias gbr="git branch"
 alias gbra="git branches"
+alias gbrd="git_delete_branch_and_upstream"
 __git_complete gbr _git_branch
 __git_complete gbra _git_branch
+__git_complete gbrd _git_branch
 
 alias gd="git diff"
 alias gdc="git diff --cached"
@@ -75,6 +77,12 @@ _cache_main_branch()
 _find_main_branch()
 {
   gh api repos/:owner/:repo | jq -r .default_branch
+}
+
+git_delete_branch_and_upstream()
+{
+  git branch -D $1
+  git push origin --delete $1
 }
 
 gffm()
