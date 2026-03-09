@@ -1,6 +1,5 @@
-export EDITOR="code --wait"
-if command -v cursor >/dev/null 2>&1; then
-    export EDITOR="cursor --wait"
-else
-    export EDITOR="code --wait"
-fi
+case "$TERM_PROGRAM" in
+    cursor)  export EDITOR="cursor --wait" ;;
+    vscode)  export EDITOR="code --wait" ;;
+    *)       export EDITOR="code --wait" ;;
+esac
