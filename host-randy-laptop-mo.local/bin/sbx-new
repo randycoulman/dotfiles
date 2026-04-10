@@ -49,6 +49,19 @@ if [[ -f "$PROJECT_PATH/.mise.toml" || -f "$PROJECT_PATH/mise.toml" ]]; then
     fi
 fi
 
+# ── Git identity ────────────────────────────────────────────────────────────
+GIT_USER_NAME="$(git config --global user.name)"
+GIT_USER_EMAIL="$(git config --global user.email)"
+if [[ -n "$GIT_USER_NAME" && -n "$GIT_USER_EMAIL" ]]; then
+    echo "Configuring git identity..."
+    sbx exec "$SANDBOX_NAME" bash -c "
+        git config --global user.name '$GIT_USER_NAME'
+        git config --global user.email '$GIT_USER_EMAIL'
+    "
+else
+    echo "Warning: host git user.name/user.email not set, skipping git identity."
+fi
+
 # ── User settings ───────────────────────────────────────────────────────────
 # Only sync explicit user preferences; never touch sandbox infrastructure keys
 # (apiKeyHelper, defaultMode, skipDangerousModePermissionPrompt, etc.).
