@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+# new-sandbox.sh — Create a Claude sandbox with synced user settings, plugins, and skills.
+#
+# Usage: new-sandbox.sh <project-path> [sandbox-name]
+#
+# One-time host prerequisites: run sbx-init.sh first.
+set -euo pipefail
+
+CLAUDE_DIR="$HOME/.claude"
+
+usage() {
+    echo "Usage: $(basename "$0") <project-path> [sandbox-name]" >&2
+    exit 1
+}
+
+[[ $# -lt 1 ]] && usage
+
+PROJECT_PATH="$(cd "$1" && pwd)"
+PROJECT_NAME="$(basename "$PROJECT_PATH")"
+# Sanitize name: only letters, numbers, hyphens, periods, plus signs allowed by sbx
+SANDBOX_NAME="${2:-claude-$(echo "$PROJECT_NAME" | tr -cs 'a-zA-Z0-9.+-' '-')}"
+
+# ── Create sandbox ──────────────────────────────────────────────────────────
+echo "Creating sandbox '$SANDBOX_NAME' for $PROJECT_PATH..."
+sbx create --name "$SANDBOX_NAME" claude "$PROJECT_PATH"
+
+# Helper: merge a JSON object (base64-encoded) into a JSON file in the sandbox.
+# Uses jq's * operator so only present keys are overlaid; existing keys are kept.
+merge_json_into() {
+    local json_b64="$1" target="$2"
+    sbx exec -e "JSON_B64=$json_b64" "$SANDBOX_NAME" bash -c "
+        json=\$(printf '%s' \"\$JSON_B64\" | base64 -d)
+        tmp=\$(mktemp)
+        base=\$([ -f \"$target\" ] && cat \"$target\" || echo '{}')
+        printf '%s' \"\$base\" | jq --argjson p \"\$json\" '. * \$p' > \"\$tmp\" && mv \"\$tmp\" \"$target\"
+    "
+}
+
+# ── Mise ────────────────────────────────────────────────────────────────────
+echo "Installing mise via apt..."
+sbx exec -u root "$SANDBOX_NAME" bash -c '
+    # Wait for any initial apt operations to finish
+    while fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do sleep 1; done
+    while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do sleep 1; done
+
+    curl -fsSL https://mise.jdx.dev/gpg-key.pub \
+        | gpg --dearmor > /usr/share/keyrings/mise-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/mise-archive-keyring.gpg arch=$(dpkg --print-architecture)] \
+        https://mise.jdx.dev/deb stable main" > /etc/apt/sources.list.d/mise.list
+    apt-get update -qq && apt-get install -y mise
+'
+# Add shims to PATH for mise-managed tools
+sbx exec "$SANDBOX_NAME" bash -c \
+    'echo "export PATH=\"\$HOME/.local/share/mise/shims:\$PATH\"" >> /etc/sandbox-persistent.sh'
+
+# Install project dev tools if a mise config is present
+sbx exec -w "$PROJECT_PATH" "$SANDBOX_NAME" bash -c '
+    if [ -f .mise.toml ] || [ -f mise.toml ]; then
+        mise trust --yes 2>&1
+        mise install 2>&1
+    fi
+'
+
+# ── User settings ───────────────────────────────────────────────────────────
+# Only sync explicit user preferences; never touch sandbox infrastructure keys
+# (apiKeyHelper, defaultMode, skipDangerousModePermissionPrompt, etc.).
+echo "Syncing user settings (model, statusLine, enabledPlugins)..."
+prefs_b64=$(jq -c '{model, statusLine, enabledPlugins} | with_entries(select(.value != null))' \
+    "$CLAUDE_DIR/settings.json" | base64 | tr -d '\n')
+merge_json_into "$prefs_b64" /home/agent/.claude/settings.json
+
+# ── Shortcut MCP ───────────────────────────────────────────────────────────
+# Only SHORTCUT_API_TOKEN is needed by the MCP server itself.
+echo "Configuring Shortcut MCP..."
+shortcut_mcp=$(jq -n \
+    --arg token "$SHORTCUT_API_RO_TOKEN" \
+    '{mcpServers: {shortcut: {type: "stdio", command: "npx", args: ["-y", "@shortcut/mcp@latest"], env: {SHORTCUT_API_TOKEN: $token}}}}' \
+    | base64 | tr -d '\n')
+merge_json_into "$shortcut_mcp" /home/agent/.claude.json
+
+# SHORTCUT_URL_SLUG and SHORTCUT_MENTION_NAME are used by skills, not the MCP.
+# Export them into the persistent sandbox environment.
+sbx exec "$SANDBOX_NAME" bash -c \
+    "cat >> /etc/sandbox-persistent.sh <<'ENVEOF'
+export SHORTCUT_URL_SLUG=\"$SHORTCUT_URL_SLUG\"
+export SHORTCUT_MENTION_NAME=\"$SHORTCUT_MENTION_NAME\"
+ENVEOF"
+
+# ── Skills ──────────────────────────────────────────────────────────────────
+if [[ -d "$CLAUDE_DIR/skills" ]]; then
+    echo "Syncing skills..."
+    tar -C "$CLAUDE_DIR" -czf - skills \
+        | sbx exec -i "$SANDBOX_NAME" bash -c 'tar -C /home/agent/.claude -xzf -'
+fi
+
+echo ""
+echo "Done. Attach with: sbx run $SANDBOX_NAME"
