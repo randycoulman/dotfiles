@@ -70,6 +70,13 @@ prefs_b64=$(jq -c '{model, statusLine, enabledPlugins} | with_entries(select(.va
     "$CLAUDE_DIR/settings.json" | base64 | tr -d '\n')
 merge_json_into "$prefs_b64" /home/agent/.claude/settings.json
 
+# Copy statusline script referenced by settings.json statusLine config
+if [[ -f "$CLAUDE_DIR/statusline.sh" ]]; then
+    echo "Copying statusline.sh..."
+    tar -C "$CLAUDE_DIR" --no-xattrs -czf - statusline.sh \
+        | sbx exec -i "$SANDBOX_NAME" bash -c 'tar -C /home/agent/.claude -xzf - && chmod +x /home/agent/.claude/statusline.sh'
+fi
+
 # ── Shortcut MCP ───────────────────────────────────────────────────────────
 # Only SHORTCUT_API_TOKEN is needed by the MCP server itself.
 echo "Configuring Shortcut MCP..."
