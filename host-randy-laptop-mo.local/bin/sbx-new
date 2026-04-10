@@ -18,7 +18,7 @@ usage() {
 PROJECT_PATH="$(cd "$1" && pwd)"
 PROJECT_NAME="$(basename "$PROJECT_PATH")"
 # Sanitize name: only letters, numbers, hyphens, periods, plus signs allowed by sbx
-SANDBOX_NAME="${2:-claude-$(echo "$PROJECT_NAME" | tr -cs 'a-zA-Z0-9.+-' '-')}"
+SANDBOX_NAME="${2:-claude-$(printf '%s' "$PROJECT_NAME" | tr -cs 'a-zA-Z0-9.+-' '-')}"
 
 # ── Create sandbox ──────────────────────────────────────────────────────────
 echo "Creating sandbox '$SANDBOX_NAME' for $PROJECT_PATH..."
@@ -36,30 +36,18 @@ merge_json_into() {
     "
 }
 
-# ── Mise ────────────────────────────────────────────────────────────────────
-echo "Installing mise via apt..."
-sbx exec -u root "$SANDBOX_NAME" bash -c '
-    # Wait for any initial apt operations to finish
-    while fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do sleep 1; done
-    while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do sleep 1; done
-
-    curl -fsSL https://mise.jdx.dev/gpg-key.pub \
-        | gpg --dearmor > /usr/share/keyrings/mise-archive-keyring.gpg
-    echo "deb [signed-by=/usr/share/keyrings/mise-archive-keyring.gpg arch=$(dpkg --print-architecture)] \
-        https://mise.jdx.dev/deb stable main" > /etc/apt/sources.list.d/mise.list
-    apt-get update -qq && apt-get install -y mise
-'
-# Add shims to PATH for mise-managed tools
-sbx exec "$SANDBOX_NAME" bash -c \
-    'echo "export PATH=\"\$HOME/.local/share/mise/shims:\$PATH\"" >> /etc/sandbox-persistent.sh'
-
-# Install project dev tools if a mise config is present
-sbx exec -w "$PROJECT_PATH" "$SANDBOX_NAME" bash -c '
-    if [ -f .mise.toml ] || [ -f mise.toml ]; then
-        mise trust --yes 2>&1
-        mise install 2>&1
+# ── Mise (check host trust; actual install is last) ────────────────────────
+NEEDS_MISE=false
+if [[ -f "$PROJECT_PATH/.mise.toml" || -f "$PROJECT_PATH/mise.toml" ]]; then
+    tilde_path="~${PROJECT_PATH#"$HOME"}"
+    if command -v mise >/dev/null 2>&1 \
+        && mise trust --show -C "$PROJECT_PATH" 2>/dev/null | grep -qF "$tilde_path: trusted"; then
+        NEEDS_MISE=true
+    else
+        echo "Skipping mise: project has a mise config but it is not trusted on the host."
+        echo "  Run 'mise trust' in $PROJECT_PATH first, then re-create the sandbox."
     fi
-'
+fi
 
 # ── User settings ───────────────────────────────────────────────────────────
 # Only sync explicit user preferences; never touch sandbox infrastructure keys
@@ -89,8 +77,29 @@ ENVEOF"
 # ── Skills ──────────────────────────────────────────────────────────────────
 if [[ -d "$CLAUDE_DIR/skills" ]]; then
     echo "Syncing skills..."
-    tar -C "$CLAUDE_DIR" -czf - skills \
+    tar -C "$CLAUDE_DIR" --no-xattrs -czf - skills \
         | sbx exec -i "$SANDBOX_NAME" bash -c 'tar -C /home/agent/.claude -xzf -'
+fi
+
+# ── Mise (last — heavy installs can stop the container) ────────────────────
+if $NEEDS_MISE; then
+    echo "Installing mise and project dev tools..."
+    sbx exec -u root "$SANDBOX_NAME" bash -c '
+        # Wait for any initial apt operations to finish
+        while fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do sleep 1; done
+        while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do sleep 1; done
+
+        curl -fsSL https://mise.jdx.dev/gpg-key.pub \
+            | gpg --dearmor > /usr/share/keyrings/mise-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/mise-archive-keyring.gpg arch=$(dpkg --print-architecture)] \
+            https://mise.jdx.dev/deb stable main" > /etc/apt/sources.list.d/mise.list
+        apt-get update -qq && apt-get install -y mise
+    '
+    sbx exec -w "$PROJECT_PATH" "$SANDBOX_NAME" bash -c '
+        echo "export PATH=\"\$HOME/.local/share/mise/shims:\$PATH\"" >> /etc/sandbox-persistent.sh
+        mise trust --yes 2>&1
+        mise install 2>&1
+    '
 fi
 
 echo ""
