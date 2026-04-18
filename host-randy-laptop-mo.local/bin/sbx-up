@@ -1,0 +1,176 @@
+#!/usr/bin/env bash
+# sbx-up — Sync latest user settings, skills, and dev tools into an existing Claude sandbox.
+#
+# Usage: sbx-up <project-path> [sandbox-name]
+#
+# Consolidates all work into at most two sbx exec calls (one root for mise apt install,
+# one agent for everything else) to minimize sandbox stop/start cycles.
+set -euo pipefail
+trap 'echo "sbx-up: failed at line $LINENO: $BASH_COMMAND" >&2' ERR
+
+CLAUDE_DIR="$HOME/.claude"
+
+usage() {
+    echo "Usage: $(basename "$0") <project-path> [sandbox-name]" >&2
+    exit 1
+}
+
+[[ $# -lt 1 ]] && usage
+
+PROJECT_PATH="$(cd "$1" && pwd)"
+PROJECT_NAME="$(basename "$PROJECT_PATH")"
+SANDBOX_NAME="${2:-claude-$(printf '%s' "$PROJECT_NAME" | tr -cs 'a-zA-Z0-9.+-' '-')}"
+PROJECT_SLUG="$(printf '%s' "$PROJECT_PATH" | tr '/.' '-')"
+HOST_MEMORY_DIR="$HOME/.claude/projects/$PROJECT_SLUG/memory"
+
+# ── Verify sandbox exists (host-side, no exec needed) ──────────────────────
+if ! sbx ls 2>/dev/null | awk 'NR>1 {print $1}' | grep -qx "$SANDBOX_NAME"; then
+    echo "Error: sandbox '$SANDBOX_NAME' not found." >&2
+    echo "  Create it first with: sbx-new $1${2:+ $2}" >&2
+    exit 1
+fi
+
+echo "Updating sandbox '$SANDBOX_NAME'..."
+
+# ── Compute host-side data ─────────────────────────────────────────────────
+# No --global so includeIf-loaded identity is honored; || true handles unset keys.
+GIT_USER_NAME="$(git config user.name || true)"
+GIT_USER_EMAIL="$(git config user.email || true)"
+
+# Managed user settings keys only (never touch sandbox infrastructure keys).
+prefs_b64=$(jq -c '{model, statusLine, enabledPlugins} | with_entries(select(.value != null))' \
+    "$CLAUDE_DIR/settings.json" | base64 | tr -d '\n')
+
+# Shortcut MCP config (only SHORTCUT_API_TOKEN is needed by the MCP server).
+shortcut_mcp_b64=$(jq -n \
+    --arg token "$SHORTCUT_API_RO_TOKEN" \
+    '{mcpServers: {shortcut: {type: "stdio", command: "npx", args: ["-y", "@shortcut/mcp@latest"], env: {SHORTCUT_API_TOKEN: $token}}}}' \
+    | base64 | tr -d '\n')
+
+# Mise trust gate — mise install only runs when the project config is trusted on the host.
+NEEDS_MISE=false
+if [[ -f "$PROJECT_PATH/.mise.toml" || -f "$PROJECT_PATH/mise.toml" ]]; then
+    tilde_path="~${PROJECT_PATH#"$HOME"}"
+    if command -v mise >/dev/null 2>&1 \
+        && mise trust --show -C "$PROJECT_PATH" 2>/dev/null | grep -qF "$tilde_path: trusted"; then
+        NEEDS_MISE=true
+    else
+        echo "Skipping mise: project has a mise config but it is not trusted on the host." >&2
+        echo "  Run 'mise trust' in $PROJECT_PATH first, then re-run sbx-up." >&2
+    fi
+fi
+
+# Collect files for the tar stream that syncs skills and statusline.
+tar_items=()
+[[ -f "$CLAUDE_DIR/statusline.sh" ]] && tar_items+=(statusline.sh)
+[[ -d "$CLAUDE_DIR/skills" ]] && tar_items+=(skills)
+
+# ── Root exec (only if mise is needed and not already installed) ───────────
+if $NEEDS_MISE; then
+    sbx exec -u root "$SANDBOX_NAME" bash -c '
+        set -e
+        while fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do sleep 1; done
+        while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do sleep 1; done
+
+        if ! command -v mise >/dev/null 2>&1; then
+            echo "Installing mise via apt..."
+            curl -fsSL https://mise.jdx.dev/gpg-key.pub \
+                | gpg --dearmor > /usr/share/keyrings/mise-archive-keyring.gpg
+            echo "deb [signed-by=/usr/share/keyrings/mise-archive-keyring.gpg arch=$(dpkg --print-architecture)] \
+                https://mise.jdx.dev/deb stable main" > /etc/apt/sources.list.d/mise.list
+            apt-get update && apt-get install -y mise
+        fi
+    '
+fi
+
+# ── Skills & statusline sync (fast exec; only -i step, short-lived) ────────
+# Split off from the main agent exec because sbx exec -i with a closed stdin
+# pipe SIGKILLs long-running work like `mise install` (exit 137). Keeping the
+# -i exec short (just tar extract) avoids the kill.
+if [[ ${#tar_items[@]} -gt 0 ]]; then
+    tar -C "$CLAUDE_DIR" --no-xattrs -czf - "${tar_items[@]}" \
+        | sbx exec -i "$SANDBOX_NAME" bash -c '
+            set -e
+            rm -rf /home/agent/.claude/skills
+            rm -f /home/agent/.claude/statusline.sh
+            tar -C /home/agent/.claude --no-xattrs -xzf -
+            [ -f /home/agent/.claude/statusline.sh ] && chmod +x /home/agent/.claude/statusline.sh
+        '
+    needs_wipe=false
+else
+    needs_wipe=true
+fi
+
+# ── Main agent exec: everything else (no -i, so long-running work is safe) ─
+AGENT_SCRIPT='
+set -e
+trap "echo \"sandbox work failed at: \$BASH_COMMAND\" >&2" ERR
+
+if [ "$NEEDS_WIPE" = "true" ]; then
+    rm -rf /home/agent/.claude/skills
+    rm -f /home/agent/.claude/statusline.sh
+fi
+
+if [ -n "$GIT_NAME" ] && [ -n "$GIT_EMAIL" ]; then
+    echo "Configuring git identity..."
+    git config --global user.name "$GIT_NAME"
+    git config --global user.email "$GIT_EMAIL"
+fi
+
+# Memory symlink — only wired up when the host memory dir is bind-mounted.
+# Sandboxes created before memory mounting existed will skip this quietly.
+if [ -d "$HOST_MEMORY_DIR" ]; then
+    mkdir -p "/home/agent/.claude/projects/$PROJECT_SLUG"
+    ln -sfn "$HOST_MEMORY_DIR" "/home/agent/.claude/projects/$PROJECT_SLUG/memory"
+fi
+
+# Shortcut env vars for skills (one-time, guarded to avoid duplicate appends).
+if [ -n "$SHORTCUT_URL_SLUG" ] \
+    && ! grep -q "^export SHORTCUT_URL_SLUG=" /etc/sandbox-persistent.sh 2>/dev/null; then
+    cat >> /etc/sandbox-persistent.sh <<ENVEOF
+export SHORTCUT_URL_SLUG="$SHORTCUT_URL_SLUG"
+export SHORTCUT_MENTION_NAME="$SHORTCUT_MENTION_NAME"
+ENVEOF
+fi
+
+echo "Syncing user settings..."
+target=/home/agent/.claude/settings.json
+prefs=$(printf "%s" "$PREFS_B64" | base64 -d)
+tmp=$(mktemp)
+base=$([ -f "$target" ] && cat "$target" || echo "{}")
+printf "%s" "$base" | jq --argjson p "$prefs" "del(.model, .statusLine, .enabledPlugins) * \$p" > "$tmp"
+mv "$tmp" "$target"
+
+echo "Configuring Shortcut MCP..."
+target=/home/agent/.claude.json
+mcp=$(printf "%s" "$SHORTCUT_MCP_B64" | base64 -d)
+tmp=$(mktemp)
+base=$([ -f "$target" ] && cat "$target" || echo "{}")
+printf "%s" "$base" | jq --argjson p "$mcp" ". * \$p" > "$tmp"
+mv "$tmp" "$target"
+
+if [ "$NEEDS_MISE" = "true" ]; then
+    echo "Running mise trust and install..."
+    grep -q "mise/shims" /etc/sandbox-persistent.sh 2>/dev/null \
+        || echo "export PATH=\"\$HOME/.local/share/mise/shims:\$PATH\"" >> /etc/sandbox-persistent.sh
+    cd "$PROJECT_PATH"
+    mise trust --yes
+    mise install
+fi
+'
+
+sbx exec \
+    -e "GIT_NAME=$GIT_USER_NAME" \
+    -e "GIT_EMAIL=$GIT_USER_EMAIL" \
+    -e "PREFS_B64=$prefs_b64" \
+    -e "SHORTCUT_MCP_B64=$shortcut_mcp_b64" \
+    -e "SHORTCUT_URL_SLUG=${SHORTCUT_URL_SLUG:-}" \
+    -e "SHORTCUT_MENTION_NAME=${SHORTCUT_MENTION_NAME:-}" \
+    -e "PROJECT_SLUG=$PROJECT_SLUG" \
+    -e "HOST_MEMORY_DIR=$HOST_MEMORY_DIR" \
+    -e "NEEDS_MISE=$NEEDS_MISE" \
+    -e "PROJECT_PATH=$PROJECT_PATH" \
+    -e "NEEDS_WIPE=$needs_wipe" \
+    "$SANDBOX_NAME" bash -c "$AGENT_SCRIPT"
+
+echo "Sandbox '$SANDBOX_NAME' is up to date."
