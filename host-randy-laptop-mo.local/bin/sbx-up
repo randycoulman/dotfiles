@@ -3,7 +3,12 @@
 #
 # Usage: sbx-up <project-path> [sandbox-name]
 #
-# Consolidates all work into at most two sbx exec calls (one root for mise apt install,
+# When pom.xml mentions playwright, the Ubuntu system libraries Playwright's
+# chromium needs are installed automatically. (Playwright's own install-deps
+# doesn't recognize Ubuntu 25.10 yet and falls back to a 24.04 list with stale
+# package names, so we install them directly.)
+#
+# Consolidates all work into at most two sbx exec calls (one root for apt installs,
 # one agent for everything else) to minimize sandbox stop/start cycles.
 set -euo pipefail
 trap 'echo "sbx-up: failed at line $LINENO: $BASH_COMMAND" >&2' ERR
@@ -22,6 +27,13 @@ PROJECT_NAME="$(basename "$PROJECT_PATH")"
 SANDBOX_NAME="${2:-claude-$(printf '%s' "$PROJECT_NAME" | tr -cs 'a-zA-Z0-9.+-' '-')}"
 PROJECT_SLUG="$(printf '%s' "$PROJECT_PATH" | tr '/.' '-')"
 HOST_MEMORY_DIR="$HOME/.claude/projects/$PROJECT_SLUG/memory"
+
+# ── Auto-detect Playwright via pom.xml ─────────────────────────────────────
+PLAYWRIGHT_DEPS=false
+if [[ -f "$PROJECT_PATH/pom.xml" ]] && grep -qi 'playwright' "$PROJECT_PATH/pom.xml"; then
+    echo "Detected Playwright in pom.xml; will install system deps."
+    PLAYWRIGHT_DEPS=true
+fi
 
 # ── Verify sandbox exists (host-side, no exec needed) ──────────────────────
 if ! sbx ls 2>/dev/null | awk 'NR>1 {print $1}' | grep -qx "$SANDBOX_NAME"; then
@@ -65,23 +77,48 @@ tar_items=()
 [[ -f "$CLAUDE_DIR/statusline.sh" ]] && tar_items+=(statusline.sh)
 [[ -d "$CLAUDE_DIR/skills" ]] && tar_items+=(skills)
 
-# ── Root exec (only if mise is needed and not already installed) ───────────
-if $NEEDS_MISE; then
-    sbx exec -u root "$SANDBOX_NAME" bash -c '
-        set -e
-        while fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do sleep 1; done
-        while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do sleep 1; done
+# ── Root exec: gh CLI (always), mise (cond.), Playwright deps (cond.) ──────
+sbx exec -u root \
+    -e "NEEDS_MISE=$NEEDS_MISE" \
+    -e "PLAYWRIGHT_DEPS=$PLAYWRIGHT_DEPS" \
+    "$SANDBOX_NAME" bash -c '
+    set -e
+    while fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do sleep 1; done
+    while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do sleep 1; done
 
-        if ! command -v mise >/dev/null 2>&1; then
-            echo "Installing mise via apt..."
-            curl -fsSL https://mise.jdx.dev/gpg-key.pub \
-                | gpg --dearmor > /usr/share/keyrings/mise-archive-keyring.gpg
-            echo "deb [signed-by=/usr/share/keyrings/mise-archive-keyring.gpg arch=$(dpkg --print-architecture)] \
-                https://mise.jdx.dev/deb stable main" > /etc/apt/sources.list.d/mise.list
-            apt-get update && apt-get install -y mise
-        fi
-    '
-fi
+    # gh CLI: replace bundled (often-stale) version with the official apt source.
+    # The bundled 2.46 hits deprecation warnings that fail some operations.
+    if [ ! -f /etc/apt/sources.list.d/github-cli.list ]; then
+        echo "Configuring GitHub CLI apt repo..."
+        apt-get install -y --no-install-recommends ca-certificates curl
+        install -d -m 755 /etc/apt/keyrings
+        curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+            -o /etc/apt/keyrings/githubcli-archive-keyring.gpg
+        chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+            > /etc/apt/sources.list.d/github-cli.list
+        apt-get update
+        apt-get install -y gh
+    fi
+
+    if [ "$NEEDS_MISE" = "true" ] && ! command -v mise >/dev/null 2>&1; then
+        echo "Installing mise via apt..."
+        curl -fsSL https://mise.jdx.dev/gpg-key.pub \
+            | gpg --dearmor > /usr/share/keyrings/mise-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/mise-archive-keyring.gpg arch=$(dpkg --print-architecture)] \
+            https://mise.jdx.dev/deb stable main" > /etc/apt/sources.list.d/mise.list
+        apt-get update && apt-get install -y mise
+    fi
+
+    if [ "$PLAYWRIGHT_DEPS" = "true" ]; then
+        echo "Installing Playwright system deps..."
+        apt-get install -y --no-install-recommends \
+            libglib2.0-0t64 libatk1.0-0t64 libatk-bridge2.0-0t64 libdbus-1-3 \
+            libatspi2.0-0t64 libx11-6 libxcomposite1 libxdamage1 libxext6 libxfixes3 \
+            libxrandr2 libgbm1 libxcb1 libxkbcommon0 libasound2t64 libnss3 libnspr4 \
+            libpango-1.0-0 libcairo2 libcups2t64
+    fi
+'
 
 # ── Skills & statusline sync (fast exec; only -i step, short-lived) ────────
 # Split off from the main agent exec because sbx exec -i with a closed stdin

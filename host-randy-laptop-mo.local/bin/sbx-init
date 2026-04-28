@@ -30,7 +30,7 @@ fi
 existing_policies=$(sbx policy ls 2>/dev/null || true)
 
 needed_domains=()
-for domain in mise.jdx.dev mise-java.jdx.dev api.app.shortcut.com cdn.playwright.dev playwright.download.prss.microsoft.com; do
+for domain in mise.jdx.dev mise-java.jdx.dev api.app.shortcut.com cdn.playwright.dev playwright.download.prss.microsoft.com cli.github.com; do
     if echo "$existing_policies" | grep -q "$domain"; then
         echo "Network access for '$domain' already allowed, skipping."
     else
