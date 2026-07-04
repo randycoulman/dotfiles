@@ -8,4 +8,4 @@ if [[ $(uname -m) == 'arm64' ]]; then
 fi
 
 alias brout="brew update && brew outdated"
-alias brup="brew upgrade && brew cleanup"
+alias brup="brew upgrade -y && brew cleanup"
