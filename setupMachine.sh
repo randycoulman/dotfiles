@@ -1,130 +1,116 @@
 #!/bin/bash
+#
+# Sets up a new machine. Clone this repo to ~/.dotfiles first, then run this
+# script from there. It is safe to re-run.
+
+set -euo pipefail
+
+DOTFILES="$HOME/.dotfiles"
+BREW_BASH=/opt/homebrew/bin/bash
 
 main() {
+  ensure_host_directory_exists
   ensure_brew_installed
-  install_brew_packages
   setup_dotfiles
-  install_asdf
-  install_global_node_modules
-  install_cask_packages
+  install_brew_packages
+  set_login_shell
+  install_languages
+  install_claude_code
+  ensure_git_message_exists
 }
 
-ensure_brew_installed() {
-  if ! [ -x $(which brew) ]
+ensure_host_directory_exists() {
+  local host_dir
+  host_dir="$DOTFILES/host-$(hostname)"
+  if ! [ -d "$host_dir" ]
   then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo "No host directory found at $host_dir."
+    echo "Rename this machine (e.g. sudo scutil --set LocalHostName <name>)"
+    echo "or create a host-$(hostname) directory, then re-run this script."
+    exit 1
   fi
 }
 
-install_brew_packages() {
-  brew_install bash
-  brew_install bash-completion@2
-  brew_install bash-git-prompt
-  brew_install bat
-  brew_install coreutils
-  brew_install difftastic
-  brew_install fop
-  brew_install gh
-  brew_install git
-  brew_install git-delta
-  brew_install gpg  # Needed for asdf nodejs plugin
-  brew_install jq
-  brew_install rlwrap
-  brew_install unixodbc
-  brew_install wxwidgets
+ensure_brew_installed() {
+  if ! [ -x /opt/homebrew/bin/brew ]
+  then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 
 setup_dotfiles() {
   brew tap thoughtbot/formulae
   brew_install rcm
-  if ! [ -e $HOME/.dotfiles ]
+  ( cd "$DOTFILES"; rcup rcrc; rcup )
+}
+
+install_brew_packages() {
+  ( cd "$DOTFILES"; brew bundle )
+}
+
+set_login_shell() {
+  if ! grep -qx "$BREW_BASH" /etc/shells
   then
-    ( cd $HOME; git clone git@github.com:randycoulman/dotfiles.git .dotfiles )
+    echo "$BREW_BASH" | sudo tee -a /etc/shells > /dev/null
   fi
-  ( cd $HOME/.dotfiles; rcup rcrc; rcup )
-}
-
-install_asdf() {
-  ensure_asdf_installed
-  install_asdf_plugins
-  install_asdf_languages
-}
-
-install_global_node_modules() {
-  npm_install yarn
-  npm_install git-mob
-}
-
-install_cask_packages() {
-  brew tap homebrew/cask-fonts
-  brew_install font-inconsolata
-  brew_install font-source-code-pro
-  brew_install libreoffice
-  brew_install quicklook-json
-  brew_install sweet-home3d
-  brew_install thunderbird
-}
-
-ensure_asdf_installed() {
-  brew_install asdf
-  source /usr/local/opt/asdf/asdf.sh
-}
-
-install_asdf_plugins() {
-  install_asdf_plugin elixir
-  install_asdf_plugin erlang
-  install_asdf_plugin nodejs
-}
-
-install_asdf_languages() {
-  asdf_install elixir 1.16.0-otp-26
-  asdf_install erlang 26.2.1
-  if ! asdf list nodejs > /dev/null
+  if [ "$(dscl . -read "$HOME" UserShell | awk '{print $2}')" != "$BREW_BASH" ]
   then
-    bash /usr/local/opt/asdf/plugins/nodejs/bin/import-release-team-keyring
-    asdf_install nodejs 18.12.1
+    chsh -s "$BREW_BASH"
   fi
 }
 
-install_asdf_plugin() {
-  plugin=$1
-  if ! asdf plugin-list | grep $plugin
+install_languages() {
+  mise_use_latest erlang
+  if ! mise_configured elixir
   then
-    asdf plugin-add $plugin https://github.com/asdf-vm/asdf-$plugin.git
-  else
-    asdf plugin-update $plugin
+    local otp_major
+    otp_major=$(mise latest erlang --installed | cut -d. -f1)
+    mise use -g --pin "elixir@$(latest_elixir_for_otp "$otp_major")"
   fi
+  mise_use_latest node
+  mise_use_latest npm:git-mob
+  mise install
+}
+
+install_claude_code() {
+  if ! [ -x "$HOME/.local/bin/claude" ]
+  then
+    curl -fsSL https://claude.ai/install.sh | bash
+  fi
+}
+
+ensure_git_message_exists() {
+  # git-mob writes co-authors here; git refuses to commit if it's missing
+  touch "$HOME/.gitmessage"
 }
 
 brew_install() {
-  package=$1
-  if ! brew ls $package > /dev/null
+  local package=$1
+  if ! brew list "$package" > /dev/null 2>&1
   then
-    brew install $package
+    brew install "$package"
   fi
 }
 
-asdf_install() {
-  language=$1
-  version=$2
-  asdf install $language $version
-  asdf global $language $version
-}
-
-npm_install() {
-  module=$1
-  if ! npm ls -g $module > /dev/null
+# Pins the latest version in the global mise config, unless the tool is already
+# configured there. Upgrade versions manually with `mise use -g --pin`.
+mise_use_latest() {
+  local tool=$1
+  if ! mise_configured "$tool"
   then
-    npm install -g $module
+    mise use -g --pin "$tool@latest"
   fi
 }
 
-gem_install() {
-  gem=$1
-  if ! gem list -i $gem > /dev/null
-  then
-    gem install $gem
-  fi
+mise_configured() {
+  local tool=$1
+  grep -qE "^\"?$tool\"? = " "$HOME/.config/mise/config.toml" 2>/dev/null
+}
+
+latest_elixir_for_otp() {
+  local otp_major=$1
+  mise ls-remote elixir | grep -E -- "^[0-9.]+-otp-$otp_major\$" | tail -1
 }
 
 main

@@ -1,0 +1,31 @@
+tap "thoughtbot/formulae"
+
+brew "bash"
+brew "bash-completion@2"
+brew "bash-git-prompt"
+brew "bat"
+brew "coreutils"
+brew "curl"
+brew "difftastic"
+brew "direnv"
+brew "gh"
+brew "git"
+brew "git-delta"
+brew "gnu-sed"
+brew "jq"
+brew "mise"
+brew "rcm"
+brew "rlwrap"
+brew "rsync"
+
+cask "alfred"
+cask "docker-desktop"
+cask "font-inconsolata"
+cask "font-source-code-pro"
+cask "iterm2"
+cask "obsidian"
+cask "sizeup"
+cask "visual-studio-code"
+
+host_brewfile = File.join(__dir__, "host-#{`hostname`.strip}", "Brewfile")
+instance_eval(File.read(host_brewfile), host_brewfile) if File.exist?(host_brewfile)
