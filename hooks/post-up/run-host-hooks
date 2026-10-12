@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# rcm only runs hooks from the top-level hooks directory, so run the matching
+# hooks from host-<hostname>/hooks, if any.
+
+stage=$(basename "$PWD")
+host_hooks="$PWD/../../host-$(hostname)/hooks/$stage"
+
+[ -d "$host_hooks" ] || exit 0
+
+for hook in "$host_hooks"/*
+do
+  [ -x "$hook" ] || continue
+  "$hook" || exit
+done

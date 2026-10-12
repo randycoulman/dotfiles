@@ -1,2 +1,2 @@
-EXCLUDES="README.md LICENSE setupMachine.sh Brewfile"
+EXCLUDES="README.md LICENSE setupMachine.sh Brewfile hooks"
 UNDOTTED="bin"
