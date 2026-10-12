@@ -1,7 +1,0 @@
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-. <(asdf completion bash)
-
-if asdf list direnv > /dev/null 2>&1; then
-  direnv() { asdf exec direnv "$@"; }
-fi
