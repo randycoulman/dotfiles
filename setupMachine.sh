@@ -11,8 +11,8 @@ BREW_BASH=/opt/homebrew/bin/bash
 main() {
   ensure_host_directory_exists
   ensure_brew_installed
-  setup_dotfiles
   install_brew_packages
+  setup_dotfiles
   set_login_shell
   install_languages
   install_claude_code
@@ -39,14 +39,12 @@ ensure_brew_installed() {
   eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 
-setup_dotfiles() {
-  brew tap thoughtbot/formulae
-  brew_install rcm
-  ( cd "$DOTFILES"; rcup rcrc; rcup )
-}
-
 install_brew_packages() {
   ( cd "$DOTFILES"; brew bundle )
+}
+
+setup_dotfiles() {
+  ( cd "$DOTFILES"; rcup rcrc; rcup )
 }
 
 set_login_shell() {
@@ -83,14 +81,6 @@ install_claude_code() {
 ensure_git_message_exists() {
   # git-mob writes co-authors here; git refuses to commit if it's missing
   touch "$HOME/.gitmessage"
-}
-
-brew_install() {
-  local package=$1
-  if ! brew list "$package" > /dev/null 2>&1
-  then
-    brew install "$package"
-  fi
 }
 
 # Pins the latest version in the global mise config, unless the tool is already
