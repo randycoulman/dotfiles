@@ -24,6 +24,7 @@ cask "font-inconsolata"
 cask "font-source-code-pro"
 cask "iterm2"
 cask "obsidian"
+cask "rocket"
 cask "visual-studio-code"
 
 host_brewfile = File.join(__dir__, "host-#{`hostname`.strip}", "Brewfile")
