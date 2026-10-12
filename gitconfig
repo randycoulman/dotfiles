@@ -65,9 +65,6 @@
 [mergetool]
   prompt = false
 
-[mergetool "sourcetree"]
-  cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
-  trustExitCode = true
 
 [push]
   default = current
@@ -84,16 +81,5 @@
 [stash]
   showPatch = true
 
-[gitreview]
-  username = randycoulman
-
-[filter "media"]
-  clean = git-media-clean %f
-  smudge = git-media-smudge %f
-[filter "lfs"]
-  required = true
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
 [commit]
-	template = /Users/randy/.gitmessage
+  template = ~/.gitmessage

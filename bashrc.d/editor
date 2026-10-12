@@ -1,5 +1,1 @@
-case "$TERM_PROGRAM" in
-    cursor)  export EDITOR="cursor --wait" ;;
-    vscode)  export EDITOR="code --wait" ;;
-    *)       export EDITOR="code --wait" ;;
-esac
+export EDITOR="code --wait"
