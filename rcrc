@@ -1,3 +1,2 @@
 EXCLUDES="README.md LICENSE setupMachine.sh"
-SYMLINK_DIRS="emacs.d plists"
 UNDOTTED="bin"

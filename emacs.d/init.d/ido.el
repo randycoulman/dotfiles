@@ -1,6 +1,0 @@
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(setq ido-use-filename-at-point 'guess)
-(ido-mode 1)
-(ido-vertical-mode)
-(setq ido-auto-merge-work-directories-length -1)
