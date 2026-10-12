@@ -82,4 +82,4 @@
   showPatch = true
 
 [commit]
-  template = ~/.gitmessage
+  template = /Users/randy/.gitmessage
