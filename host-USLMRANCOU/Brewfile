@@ -1,1 +1,3 @@
 # Packages that should only be installed on this machine
+
+cask "1password"
