@@ -1,3 +1,8 @@
 # Packages that should only be installed on this machine
 
+tap "dopplerhq/cli"
+
+brew "awscli"
+brew "dopplerhq/cli/doppler"
+
 cask "1password"
