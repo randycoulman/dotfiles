@@ -1,5 +1,3 @@
-tap "thoughtbot/formulae"
-
 brew "bash"
 brew "bash-completion@2"
 brew "bash-git-prompt"
