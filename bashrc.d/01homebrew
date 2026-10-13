@@ -1,4 +1,5 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 alias brout="brew update && brew outdated"
 alias brup="brew upgrade -y && brew cleanup"
