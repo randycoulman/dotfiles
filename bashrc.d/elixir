@@ -1,6 +1,7 @@
 export ELIXIR_EDITOR="code -g __FILE__:__LINE__"
 export ECTO_EDITOR=$ELIXIR_EDITOR
 export KERL_BUILD_DOCS=yes
+export KERL_CONFIGURE_OPTIONS="--with-ssl=/opt/homebrew/opt/openssl@3 --without-javac"
 export PLUG_EDITOR="vscode://file/__FILE__:__LINE__"
 
 alias mc="mix credo"
