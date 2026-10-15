@@ -5,3 +5,4 @@ brew "cloudflared"
 brew "doppler"
 
 cask "1password"
+cask "beekeeper-studio"
