@@ -1,6 +1,7 @@
 # Packages that should only be installed on this machine
 
 brew "awscli"
+brew "cloudflared"
 brew "doppler"
 
 cask "1password"
