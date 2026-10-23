@@ -25,6 +25,7 @@ Shared packages are listed in `Brewfile`, which also loads
 
 ## Language versions
 
-Languages are managed by [mise](https://mise.jdx.dev). `setupMachine.sh` pins the
-latest versions in `~/.config/mise/config.toml`, which is not tracked here;
-upgrade them with `mise use -g --pin <tool>@<version>`.
+Languages are managed by [asdf](https://asdf-vm.com). `setupMachine.sh` pins the
+latest versions in `~/.tool-versions`, which is not tracked here; upgrade them
+with `asdf set -u <tool> <version>`. [mise](https://mise.jdx.dev) is installed
+for projects that opt in with a `mise.toml`; it ignores `.tool-versions` files.
