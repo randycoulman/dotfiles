@@ -58,18 +58,15 @@ set_login_shell() {
   fi
 }
 
-install_languages() {
-  mise_use_latest erlang
-  if ! mise_configured elixir
-  then
-    local otp_major
-    otp_major=$(mise latest erlang --installed | cut -d. -f1)
-    mise use -g --pin "elixir@$(latest_elixir_for_otp "$otp_major")"
-  fi
-  mise_use_latest node
-  mise_use_latest npm:git-mob
-  mise install
-}
+install_languages() (
+  cd "$HOME"
+  # kerl reads its build options from the environment, which may predate them
+  . "$DOTFILES/bashrc.d/elixir"
+  asdf_install erlang
+  asdf_install elixir latest_elixir_for_pinned_otp
+  asdf_install nodejs
+  install_git_mob
+)
 
 install_claude_code() {
   if ! [ -x "$HOME/.local/bin/claude" ]
@@ -83,24 +80,28 @@ ensure_git_message_exists() {
   touch "$HOME/.gitmessage"
 }
 
-# Pins the latest version in the global mise config, unless the tool is already
-# configured there. Upgrade versions manually with `mise use -g --pin`.
-mise_use_latest() {
-  local tool=$1
-  if ! mise_configured "$tool"
+install_git_mob() {
+  if ! asdf which git-mob &>/dev/null
   then
-    mise use -g --pin "$tool@latest"
+    asdf exec npm install -g git-mob
+    asdf reshim nodejs
   fi
 }
 
-mise_configured() {
-  local tool=$1
-  grep -qE "^\"?$tool\"? = " "$HOME/.config/mise/config.toml" 2>/dev/null
+asdf_install() {
+  local tool=$1 version_cmd=${2:-asdf latest}
+  asdf plugin add "$tool"
+  if ! asdf current "$tool" &>/dev/null
+  then
+    asdf set -u "$tool" "$($version_cmd "$tool")"
+  fi
+  asdf install "$tool"
 }
 
-latest_elixir_for_otp() {
-  local otp_major=$1
-  mise ls-remote elixir | grep -E -- "^[0-9.]+-otp-$otp_major\$" | tail -1
+latest_elixir_for_pinned_otp() {
+  local otp_major
+  otp_major=$(asdf current --no-header erlang | awk '{ print $2 }' | cut -d. -f1)
+  asdf list all elixir | grep -E -- "^[0-9.]+-otp-$otp_major\$" | tail -1
 }
 
 main
