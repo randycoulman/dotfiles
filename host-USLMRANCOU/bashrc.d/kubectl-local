@@ -1,0 +1,3 @@
+alias kprod='klogin catalog-prod prod'
+alias kprodw='klogin catalog-prod-write prod'
+alias kstaging='klogin catalog-staging staging'

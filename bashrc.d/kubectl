@@ -1,0 +1,88 @@
+# Completion for the `k` alias
+if command -v kubectl >/dev/null 2>&1; then
+  source <(kubectl completion bash)
+  complete -o default -F __start_kubectl k
+
+  # --- Basics ---
+  alias k='kubectl'
+  alias kg='kubectl get'
+  alias kd='kubectl describe'
+  #alias kaf='kubectl apply -f'
+  alias kgp='kubectl get pods'
+  alias kgpw='kubectl get pods -w'
+  alias kgpo='kubectl get pods -o wide'
+  alias kgd='kubectl get deploy'
+  alias kgs='kubectl get svc'
+  alias kgn='kubectl get nodes'
+  alias kge='kubectl get events --sort-by=.lastTimestamp'
+
+  # --- Logs and debugging ---
+  alias kl='kubectl logs'
+  alias klf='kubectl logs -f --tail=100'
+  alias klp='kubectl logs --previous'
+  alias kex='kubectl exec -it'
+  alias ktp='kubectl top pods'
+  alias ktn='kubectl top nodes'
+
+  # --- Context and namespace ---
+  alias kctx='kubectl config current-context'
+  alias kctxs='kubectl config get-contexts'
+  alias kuse='kubectl config use-context'
+  alias kns='kubectl config set-context --current --namespace'
+  alias kwhere='kubectl config view --minify -o jsonpath="{..namespace}"'
+  alias kn='kubectl -n'
+
+  # --- AWS EKS ---
+  # Add or refresh a cluster in your kubeconfig and switch to it.
+  # Uses AWS_PROFILE / AWS_REGION from the environment unless overridden.
+  #   keks <cluster> [region] [profile]
+  keks() {
+    local cluster="$1" region="$2" profile="$3"
+    [ -z "$cluster" ] && { echo "usage: keks <cluster> [region] [profile]" >&2; return 1; }
+    local args=(eks update-kubeconfig --name "$cluster")
+    [ -n "$region" ] && args+=(--region "$region")
+    [ -n "$profile" ] && args+=(--profile "$profile")
+    aws "${args[@]}"
+  }
+
+  # Ensure AWS credentials for a profile are valid (logging in via SSO if not),
+  # then switch kubectl context.
+  #   klogin <aws-profile> <kube-context>
+  klogin() {
+    local profile="$1" context="$2"
+    if [ -z "$profile" ] || [ -z "$context" ]; then
+      echo "usage: klogin <aws-profile> <kube-context>" >&2
+      return 1
+    fi
+    aws sts get-caller-identity --profile "$profile" >/dev/null 2>&1 \
+      || aws sso login --profile "$profile" \
+      || return
+    kubectl config use-context "$context"
+  }
+
+  # Run one kubectl command against another context without switching to it:
+  #   kin <context> get pods
+  kin() {
+    local context="$1"; shift
+    kubectl --context "$context" "$@"
+  }
+
+  # --- Helpers ---
+  # Tail logs from the first pod matching a name fragment
+  klg() { kubectl logs -f --tail=100 "$(kubectl get pods -o name | grep -m1 "$1")"; }
+
+  # Shell into the first pod matching a name fragment (default shell: sh)
+  ksh() { kubectl exec -it "$(kubectl get pods -o name | grep -m1 "$1")" -- "${2:-sh}"; }
+
+  # Restart a deployment and watch the rollout
+  krr() { kubectl rollout restart deploy/"$1" && kubectl rollout status deploy/"$1"; }
+
+  # Pods that are not Running or Succeeded, across all namespaces
+  kbad() { kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded; }
+
+  # Decode a secret value: ksec <secret> <key>
+  ksec() { kubectl get secret "$1" -o jsonpath="{.data.$2}" | base64 -d; echo; }
+
+  # Port-forward: kpf <svc/name or pod> <local>:<remote>
+  kpf() { kubectl port-forward "$1" "$2"; }
+fi
