@@ -1,2 +1,3 @@
 cask "libreoffice"
+cask "sweet-home3d"
 cask "temurin"
